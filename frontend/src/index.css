@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #F3F4EF;
+  --color-ink: #1C2321;
+  --color-ink-soft: #4B5A56;
+  --color-redline: #B4383A;
+  --color-insert: #3E7C59;
+  --color-gold: #B98A2B;
+
+  --font-display: "Fraunces", serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background-color: #F3F4EF;
+}
