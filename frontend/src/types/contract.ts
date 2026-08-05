@@ -1,21 +1,20 @@
 export interface ExtractedFields {
-  parties: string[];
-  effectiveDate: string;
-  expiryDate: string;
-  value: number;
-  currency: string;
-  governingLaw: string;
-  renewalTerms: string;
-  keyClauses: string[];
+  parties: string[] | null;
+  effective_date: string | null;
+  expiry_date: string | null;
+  value: number | null;
+  currency: string | null;
+  governing_law: string | null;
+  renewal_terms: string | null;
+  key_clauses: string[] | null;
 }
 
 export type ContractStatus = "uploaded" | "processing" | "extracted" | "failed";
 
 export interface Contract {
   id: string;
-  fileName: string;
-  uploadedBy: string;
-  uploadedAt: string;
+  file_name: string;
   status: ContractStatus;
-  extractedFields: ExtractedFields | null;
+  uploaded_at: string;
+  extracted_fields: ExtractedFields | null;
 }
