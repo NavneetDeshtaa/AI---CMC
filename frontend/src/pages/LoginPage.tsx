@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FileText, ShieldCheck, Search, BrainCircuit } from "lucide-react";
 
 import { login } from "../api/auth";
@@ -162,6 +162,14 @@ export default function LoginPage() {
                   "Sign In"
                 )}
               </button>
+
+            <p className="text-xs text-slate-500 text-center mt-4">
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-slate-800 font-medium hover:underline">
+            Sign up
+          </Link>
+        </p>
+
             </form>
 
             <div className="mt-8 border-t border-slate-200 pt-6 text-center">
