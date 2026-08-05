@@ -28,7 +28,6 @@ export default function ContractTable({ contracts }: ContractTableProps) {
       <thead>
         <tr className="border-b border-slate-200 text-left text-sm text-slate-500">
           <th className="py-3 px-4 font-medium">File Name</th>
-          <th className="py-3 px-4 font-medium">Uploaded By</th>
           <th className="py-3 px-4 font-medium">Uploaded At</th>
           <th className="py-3 px-4 font-medium">Status</th>
         </tr>
