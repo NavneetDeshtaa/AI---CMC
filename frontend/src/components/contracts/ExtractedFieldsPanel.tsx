@@ -5,7 +5,10 @@ interface ExtractedFieldsPanelProps {
   status: string;
 }
 
-export default function ExtractedFieldsPanel({ fields, status }: ExtractedFieldsPanelProps) {
+export default function ExtractedFieldsPanel({
+  fields,
+  status,
+}: ExtractedFieldsPanelProps) {
   if (!fields) {
     return (
       <div className="bg-slate-50 border border-slate-200 rounded-lg p-6 text-center text-slate-500 text-sm">
@@ -23,21 +26,25 @@ export default function ExtractedFieldsPanel({ fields, status }: ExtractedFields
       </h3>
 
       <div className="grid grid-cols-2 gap-4">
-        <Field label="Parties" value={fields.parties.join(" & ")} />
-        <Field label="Governing Law" value={fields.governingLaw} />
-        <Field label="Effective Date" value={fields.effectiveDate} />
-        <Field label="Expiry Date" value={fields.expiryDate} />
+        <Field label="Parties" value={fields.parties?.join(" & ") ?? "—"} />
+        <Field label="Governing Law" value={fields.governing_law ?? "—"} />
+        <Field label="Effective Date" value={fields.effective_date ?? "—"} />
+        <Field label="Expiry Date" value={fields.expiry_date ?? "—"} />
         <Field
           label="Contract Value"
-          value={`${fields.currency} ${fields.value.toLocaleString()}`}
+          value={
+            fields.value
+              ? `${fields.currency} ${fields.value.toLocaleString()}`
+              : "—"
+          }
         />
-        <Field label="Renewal Terms" value={fields.renewalTerms} />
+        <Field label="Renewal Terms" value={fields.renewal_terms ?? "—"} />
       </div>
 
       <div>
         <p className="text-xs font-medium text-slate-500 mb-2">Key Clauses</p>
         <div className="flex flex-wrap gap-2">
-          {fields.keyClauses.map((clause) => (
+          {(fields.key_clauses ?? []).map((clause) => (
             <span
               key={clause}
               className="text-xs bg-slate-100 text-slate-700 px-2.5 py-1 rounded-full"

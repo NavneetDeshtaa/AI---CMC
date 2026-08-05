@@ -41,11 +41,10 @@ export default function ContractTable({ contracts }: ContractTableProps) {
             className="border-b border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors"
           >
             <td className="py-3 px-4 text-sm font-medium text-slate-800">
-              {contract.fileName}
+              {contract.file_name}
             </td>
-            <td className="py-3 px-4 text-sm text-slate-600">{contract.uploadedBy}</td>
             <td className="py-3 px-4 text-sm text-slate-600">
-              {new Date(contract.uploadedAt).toLocaleDateString()}
+              {new Date(contract.uploaded_at).toLocaleDateString()}
             </td>
             <td className="py-3 px-4">
               <span

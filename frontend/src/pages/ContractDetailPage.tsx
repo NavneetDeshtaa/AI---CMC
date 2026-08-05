@@ -30,10 +30,9 @@ export default function ContractDetailPage() {
 
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-semibold text-slate-800">{contract.fileName}</h1>
+          <h1 className="text-xl font-semibold text-slate-800">{contract.file_name}</h1>
           <p className="text-sm text-slate-500 mt-1">
-            Uploaded by {contract.uploadedBy} on{" "}
-            {new Date(contract.uploadedAt).toLocaleDateString()}
+            {new Date(contract.uploaded_at).toLocaleDateString()}
           </p>
         </div>
         <span className="text-xs font-medium px-2.5 py-1 rounded-full bg-slate-100 text-slate-700">
@@ -41,7 +40,7 @@ export default function ContractDetailPage() {
         </span>
       </div>
 
-      <ExtractedFieldsPanel fields={contract.extractedFields} status={contract.status} />
+      <ExtractedFieldsPanel fields={contract.extracted_fields} status={contract.status} />
     </div>
   );
 }
