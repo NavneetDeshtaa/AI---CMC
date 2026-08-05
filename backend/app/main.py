@@ -14,8 +14,3 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(contracts.router)
-
-
-@app.get("/health")
-def health_check():
-    return {"status": "ok"}
