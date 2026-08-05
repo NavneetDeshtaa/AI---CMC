@@ -1,0 +1,69 @@
+from fastapi import APIRouter, Depends, UploadFile, File, HTTPException
+from sqlalchemy.orm import Session, joinedload
+from typing import List
+from app.database import get_db
+from app.models.contract import Contract
+from app.models.user import User
+from app.schemas.contract import ContractOut
+from app.api.deps import get_current_user
+from app.core.storage import save_file
+
+router = APIRouter(prefix="/contracts", tags=["contracts"])
+
+ALLOWED_EXTENSIONS = {".pdf", ".doc", ".docx"}
+
+
+@router.post("/upload", response_model=ContractOut)
+async def upload_contract(
+    file: UploadFile = File(...),
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    ext = "." + file.filename.split(".")[-1].lower() if "." in file.filename else ""
+    if ext not in ALLOWED_EXTENSIONS:
+        raise HTTPException(status_code=400, detail="Only PDF and Word files are allowed")
+
+    file_bytes = await file.read()
+    file_path = save_file(file_bytes, file.filename)
+
+    contract = Contract(
+        file_name=file.filename,
+        file_path=file_path,
+        uploaded_by=current_user.id,
+    )
+    db.add(contract)
+    db.commit()
+    db.refresh(contract)
+
+    return contract
+
+
+@router.get("", response_model=List[ContractOut])
+def list_contracts(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    contracts = (
+        db.query(Contract)
+        .options(joinedload(Contract.extracted_fields))
+        .order_by(Contract.uploaded_at.desc())
+        .all()
+    )
+    return contracts
+
+
+@router.get("/{contract_id}", response_model=ContractOut)
+def get_contract(
+    contract_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user),
+):
+    contract = (
+        db.query(Contract)
+        .options(joinedload(Contract.extracted_fields))
+        .filter(Contract.id == contract_id)
+        .first()
+    )
+    if not contract:
+        raise HTTPException(status_code=404, detail="Contract not found")
+    return contract
