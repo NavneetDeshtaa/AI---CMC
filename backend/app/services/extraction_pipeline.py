@@ -25,8 +25,42 @@ CONTRACT TEXT:
 {contract_text}
 """
 
-
 def call_grok_extraction(contract_text: str) -> dict:
+    truncated_text = contract_text[:15000]
+
+    response = requests.post(
+        GROK_API_URL,
+        headers={
+            "Authorization": f"Bearer {settings.grok_api_key}",
+            "Content-Type": "application/json",
+        },
+        json={
+            "model": "grok-4-fast",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": EXTRACTION_PROMPT.format(contract_text=truncated_text),
+                }
+            ],
+            "temperature": 0,
+        },
+        timeout=60,
+    )
+
+    if not response.ok:
+        print(f"Grok API error {response.status_code}: {response.text}")
+
+    response.raise_for_status()
+    raw_content = response.json()["choices"][0]["message"]["content"]
+
+    cleaned = raw_content.strip()
+    if cleaned.startswith("```"):
+        cleaned = cleaned.split("```")[1]
+        if cleaned.startswith("json"):
+            cleaned = cleaned[4:]
+    cleaned = cleaned.strip()
+
+    return json.loads(cleaned)
     truncated_text = contract_text[:15000]  # keep prompt within reasonable token bounds
 
     response = requests.post(
