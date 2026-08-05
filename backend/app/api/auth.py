@@ -10,6 +10,7 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 
 
 @router.post("/signup", response_model=AuthResponse)
+
 def signup(payload: UserSignup, db: Session = Depends(get_db)):
     existing = db.query(User).filter(User.email == payload.email).first()
     if existing:
@@ -29,6 +30,7 @@ def signup(payload: UserSignup, db: Session = Depends(get_db)):
 
 
 @router.post("/login", response_model=AuthResponse)
+
 def login(payload: UserLogin, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == payload.email).first()
     if not user or not verify_password(payload.password, user.hashed_password):
@@ -39,5 +41,6 @@ def login(payload: UserLogin, db: Session = Depends(get_db)):
 
 
 @router.get("/me", response_model=UserOut)
+
 def get_me(current_user: User = Depends(get_current_user)):
     return current_user
