@@ -9,7 +9,7 @@ from app.schemas.contract import ContractOut
 from app.api.deps import get_current_user
 from app.core.storage import save_file
 from app.services.text_extraction import extract_contract_text
-from app.services.extraction_pipeline import call_grok_extraction
+from app.services.extraction_pipeline import call_groq_extraction
 
 router = APIRouter(prefix="/contracts", tags=["contracts"])
 
@@ -49,7 +49,7 @@ async def upload_contract(
         if not contract_text or len(contract_text) < 20:
             raise ValueError("No extractable text found in document")
 
-        extracted_data = call_grok_extraction(contract_text)
+        extracted_data = call_groq_extraction(contract_text)
 
         extracted_fields = ExtractedFields(
             contract_id=contract.id,
