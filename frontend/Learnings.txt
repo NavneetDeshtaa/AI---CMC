@@ -1,0 +1,3 @@
+
+For reusable logics/functions which also uses react or custom hooks - Add the to hooks folder. 
+For reusable logics/functions only   - Add them to services folder. 
