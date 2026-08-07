@@ -1,6 +1,6 @@
 import uuid
 import enum
-from sqlalchemy import Column, String, Enum, DateTime, ForeignKey
+from sqlalchemy import Column, String, Enum, DateTime, ForeignKey, Text
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -22,7 +22,18 @@ class Contract(Base):
     status = Column(Enum(ContractStatus), default=ContractStatus.uploaded, nullable=False)
     uploaded_at = Column(DateTime(timezone=True), server_default=func.now())
 
+    # NEW: caches the full parsed text (from text_extraction.py) so downstream
+    # steps -- chunking here, and the summarizer in Step 4 -- never need to
+    # re-parse the source file from disk.
+    raw_text = Column(Text, nullable=True)
+
     uploader = relationship("User")
     extracted_fields = relationship(
         "ExtractedFields", back_populates="contract", uselist=False, cascade="all, delete-orphan"
+    )
+    # NEW: one contract -> many chunks. cascade delete so removing a contract
+    # cleans up its chunks automatically (no orphaned vectors left behind).
+    chunks = relationship(
+        "Chunk", back_populates="contract", cascade="all, delete-orphan",
+        order_by="Chunk.chunk_index"
     )
