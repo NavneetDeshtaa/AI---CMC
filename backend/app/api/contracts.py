@@ -49,6 +49,8 @@ async def upload_contract(
         if not contract_text or len(contract_text) < 20:
             raise ValueError("No extractable text found in document")
 
+        contract.raw_text = contract_text
+
         extracted_data = call_groq_extraction(contract_text)
 
         extracted_fields = ExtractedFields(
