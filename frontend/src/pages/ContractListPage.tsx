@@ -2,14 +2,16 @@ import { useState } from "react";
 import { useContracts } from "../hooks/useContracts";
 import ContractTable from "../components/contracts/ContractTable";
 import UploadContractModal from "../components/contracts/UploadContractModal";
+import SearchBar from "../components/ui/SearchBar";
 
 export default function ContractListPage() {
   const { data: contracts, isLoading, error } = useContracts();
   const [uploadOpen, setUploadOpen] = useState(false);
 
   return (
-    <div className="max-w-5xl mx-auto py-10 px-6">
-      <div className="flex items-center justify-between mb-6">
+    <div className="max-w-5xl mx-auto py-10 px-6 mb-3">
+      <SearchBar/>
+      <div className="flex items-center justify-between mb-6 mt-6">
         <div>
           <h1 className="text-xl font-semibold text-slate-800">Contracts</h1>
           <p className="text-sm text-slate-500 mt-1">
