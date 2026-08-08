@@ -1,10 +1,22 @@
 
 Pydantic : 
-    - Used in Schemas folder in backend 
+    - Used in the Schemas folder
     - Used to define structure and validation for incoming and outgoing APIS's from FastAPI application. 
 
 
 Pydantic Seetings : 
-    - Used in the config file.
+    - Used in the Config file inside Core folder
     - It loads config data into typed python object. 
     - Simply it validates our config and turn it into python object for be used as validated data. 
+
+
+SQL-Alchemy (ORM) :
+    - Used in the models folder. 
+    - It is Object Relational Mapper. 
+    - Prevent our application from SQL injection. 
+
+    - Python           PostgreSQL
+    - User class       users table
+    - User object      one row
+    - User.id          id column
+    - User.email       email column 

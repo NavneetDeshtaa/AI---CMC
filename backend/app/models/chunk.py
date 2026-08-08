@@ -21,18 +21,11 @@ class Chunk(Base):
     # the Contract.chunks relationship (ORM-level) -- belt and suspenders,
     # so chunks are cleaned up whether a contract is deleted via the ORM
     # or via a raw SQL/psql command.
-    contract_id = Column(
-        UUID(as_uuid=True),
-        ForeignKey("contracts.id", ondelete="CASCADE"),
-        nullable=False,
-        index=True,
-    )
+    contract_id = Column(UUID(as_uuid=True),ForeignKey("contracts.id", ondelete="CASCADE"),nullable=False,index=True,)
 
     # Position of this chunk within the contract's full text (0, 1, 2...).
     # Lets us reconstruct order and show "chunk 3 of 12" style context.
     chunk_index = Column(Integer, nullable=False)
-
     chunk_text = Column(Text, nullable=False)
     embedding = Column(Vector(EMBEDDING_DIM), nullable=False)
-
     contract = relationship("Contract", back_populates="chunks")
