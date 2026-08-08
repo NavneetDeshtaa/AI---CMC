@@ -17,11 +17,7 @@ def _split_into_sentences(text: str) -> List[str]:
     return [s.strip() for s in sentences if s.strip()]
 
 
-def chunk_text(
-    text: str,
-    chunk_size: int = DEFAULT_CHUNK_SIZE,
-    overlap: int = DEFAULT_OVERLAP,
-) -> List[str]:
+def chunk_text(text: str,chunk_size: int = DEFAULT_CHUNK_SIZE,overlap: int = DEFAULT_OVERLAP,) -> List[str]:
     """
     Splits text into overlapping chunks, breaking on sentence boundaries
     where possible so a chunk doesn't cut a clause in half mid-sentence.
