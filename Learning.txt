@@ -4,3 +4,7 @@ Pydantic :
     - Used to define structure and validation for incoming and outgoing APIS's from FastAPI application. 
 
 
+Pydantic Seetings : 
+    - Used in the config file.
+    - It loads config data into typed python object. 
+    - Simply it validates our config and turn it into python object for be used as validated data. 
