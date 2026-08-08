@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import auth, contracts
+from app.api import auth, contracts, search
 
 app = FastAPI(title="Contract Intelligence API")
 
@@ -14,3 +14,4 @@ app.add_middleware(
 
 app.include_router(auth.router)
 app.include_router(contracts.router)
+app.include_router(search.router)
