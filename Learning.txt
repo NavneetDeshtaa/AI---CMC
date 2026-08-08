@@ -1,0 +1,6 @@
+
+Pydantic : 
+    - Used in Schemas folder in backend 
+    - Used to define structure and validation for incoming and outgoing APIS's from FastAPI application. 
+
+
