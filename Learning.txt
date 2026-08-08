@@ -20,3 +20,8 @@ SQL-Alchemy (ORM) :
     - User object      one row
     - User.id          id column
     - User.email       email column 
+
+
+Alembic :
+   - Used in the Alembic folder.
+   - Migration tool to keep sync bw DB Schema and SQL-Alchemy models.
