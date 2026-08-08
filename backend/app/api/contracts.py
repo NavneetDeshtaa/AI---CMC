@@ -51,7 +51,7 @@ async def upload_contract(
 
         contract.raw_text = contract_text
 
-        extracted_data = call_groq_extraction(contract_text)
+        extracted_data = call_groq_extraction(contract.raw_text)
 
         extracted_fields = ExtractedFields(
             contract_id=contract.id,
