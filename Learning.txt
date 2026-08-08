@@ -1,4 +1,6 @@
 
+PHASE 1 : 
+
 Pydantic : 
     - Used in the Schemas folder
     - Used to define structure and validation for incoming and outgoing APIS's from FastAPI application. 
@@ -25,3 +27,7 @@ SQL-Alchemy (ORM) :
 Alembic :
    - Used in the Alembic folder.
    - Migration tool to keep sync bw DB Schema and SQL-Alchemy models.
+
+
+
+PHASE 2 : 
