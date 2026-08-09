@@ -9,7 +9,6 @@ export default function SearchPage() {
       <p className="text-sm text-slate-500 mb-6">
         Ask questions in plain language across all your contracts.
       </p>
-
       <SearchBar />
     </div>
   );
