@@ -59,14 +59,11 @@ def natural_language_search(db: Session, query: str, top_n: int = 5) -> dict:
         return {"answer": "No contracts matched those criteria.", "sources": []}
 
     if filters.semantic_query:
-        top_contracts = search_contracts(
-            db, filters.semantic_query, top_n_contracts=top_n, contract_ids=contract_ids
-        )
+        top_contracts = search_contracts(db, filters.semantic_query, top_n_contracts=top_n, contract_ids=contract_ids)
+        
         # Pull several chunks per matched contract for generation context,
         # not just each contract's single best chunk.
-        chunks_for_context = search_chunks(
-            db, filters.semantic_query, top_k=top_n * 3, contract_ids=contract_ids
-        )
+        chunks_for_context = search_chunks(db, filters.semantic_query, top_k=top_n * 3, contract_ids=contract_ids)
     else:
         # Pure metadata query ("expiring next month") -- no topic to search
         # semantically. List the matched contracts directly.
