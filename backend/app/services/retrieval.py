@@ -6,12 +6,7 @@ from app.models.contract import Contract
 from app.services.embeddings import embed_query
 
 
-def search_chunks(
-    db: Session,
-    query: str,
-    top_k: int = 5,
-    contract_ids: Optional[List[str]] = None,
-) -> List[dict]:
+def search_chunks(db: Session, query: str, top_k: int = 5, contract_ids: Optional[List[str]] = None,) -> List[dict]:
     """
     Embeds the query, then finds the top_k chunks across all contracts
     whose embeddings are closest (by cosine distance) to the query's
@@ -56,13 +51,7 @@ def search_chunks(
     ]
 
 
-def search_contracts(
-    db: Session,
-    query: str,
-    top_k_chunks: int = 20,
-    top_n_contracts: int = 5,
-    contract_ids: Optional[List[str]] = None,
-) -> List[dict]:
+def search_contracts(db: Session, query: str, top_k_chunks: int = 20, top_n_contracts: int = 5, contract_ids: Optional[List[str]] = None,) -> List[dict]:
     """
     Retrieves relevant CONTRACTS, not just chunks. A contract can have
     multiple chunks match a query -- we don't want to show the same
