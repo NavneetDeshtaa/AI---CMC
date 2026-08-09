@@ -29,6 +29,9 @@ class Contract(Base):
 
     uploader = relationship("User")
     extracted_fields = relationship("ExtractedFields", back_populates="contract", uselist=False, cascade="all, delete-orphan")
+        
     # NEW: one contract -> many chunks. cascade delete so removing a contract
     # cleans up its chunks automatically (no orphaned vectors left behind).
     chunks = relationship("Chunk", back_populates="contract", cascade="all, delete-orphan",order_by="Chunk.chunk_index")
+
+    summary = relationship("ContractSummary", back_populates="contract", uselist=False, cascade="all, delete-orphan")
