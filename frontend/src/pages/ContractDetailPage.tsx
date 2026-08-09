@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useContract } from "../hooks/useContract";
 import ExtractedFieldsPanel from "../components/contracts/ExtractedFieldsPanel";
+import SummaryPanel from "../components/ui/SummaryPanel";
 
 export default function ContractDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -41,6 +42,9 @@ export default function ContractDetailPage() {
       </div>
 
       <ExtractedFieldsPanel fields={contract.extracted_fields} status={contract.status} />
+       <div className="mt-6">
+        <SummaryPanel contractId={contract.id} />
+      </div>
     </div>
   );
 }
