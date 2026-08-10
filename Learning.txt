@@ -31,3 +31,18 @@ Alembic :
 
 
 PHASE 2 : 
+
+  Chunking 
+    - Chunk size 
+    - Chunk Overlap
+
+  Embeddings
+   - Dimensions 
+
+  Sentence Transformers. 
+
+  Singleton Loading (lru cache) 
+
+  RAG 
+
+  Caching - Used in built python module - HASHLIB (uses SHA-256 Algorithm).
