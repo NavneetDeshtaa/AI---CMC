@@ -1,8 +1,4 @@
-import json
-import requests
-from app.core.config import settings
-
-GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions"
+from app.services.LLM.groq_client import call_groq, parse_json_response
 
 EXTRACTION_PROMPT = """You are a contract analysis assistant. Extract the following fields from the contract text below.
 Respond with ONLY a valid JSON object, no markdown formatting, no explanation, matching exactly this structure:
@@ -27,38 +23,14 @@ CONTRACT TEXT:
 
 
 def call_groq_extraction(contract_text: str) -> dict:
+    """
+    Extracts structured fields (parties, dates, value, clauses, etc.) from
+    contract text via the LLM. This function's job is document
+    understanding -- it just happens to delegate the actual API call to
+    the shared groq_client, same as every other feature that needs an
+    LLM call does.
+    """
     truncated_text = contract_text[:15000]
-
-    response = requests.post(
-        GROQ_API_URL,
-        headers={
-            "Authorization": f"Bearer {settings.groq_api_key}",
-            "Content-Type": "application/json",
-        },
-        json={
-            "model": "llama-3.3-70b-versatile",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": EXTRACTION_PROMPT.format(contract_text=truncated_text),
-                }
-            ],
-            "temperature": 0,
-        },
-        timeout=60,
-    )
-
-    if not response.ok:
-        print(f"Groq API error {response.status_code}: {response.text}")
-
-    response.raise_for_status()
-    raw_content = response.json()["choices"][0]["message"]["content"]
-
-    cleaned = raw_content.strip()
-    if cleaned.startswith("```"):
-        cleaned = cleaned.split("```")[1]
-        if cleaned.startswith("json"):
-            cleaned = cleaned[4:]
-    cleaned = cleaned.strip()
-
-    return json.loads(cleaned)
+    prompt = EXTRACTION_PROMPT.format(contract_text=truncated_text)
+    raw_content = call_groq(prompt, temperature=0)
+    return parse_json_response(raw_content)
