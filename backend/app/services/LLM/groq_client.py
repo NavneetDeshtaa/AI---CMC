@@ -8,9 +8,8 @@ GROQ_MODEL = "llama-3.3-70b-versatile"
 
 def call_groq(prompt: str, temperature: float = 0, timeout: int = 60) -> str:
     """
-    Generic Groq chat completion call. Same request pattern as your Phase 1
-    extraction service (call_groq_extraction) -- pulled out here so every
-    Phase 2+ feature that needs an LLM call (query routing, RAG answer
+    Generic Groq chat completion call. Pulled out here so every
+    feature that needs an LLM call (query routing, RAG answer
     generation, and the summarizer in Step 4) shares one client instead of
     each service reimplementing the requests.post() boilerplate.
     """

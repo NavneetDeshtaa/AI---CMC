@@ -9,7 +9,7 @@ from app.schemas.contract import ContractOut
 from app.api.deps import get_current_user
 from app.core.storage import save_file
 from app.services.Documents.text_extraction import extract_contract_text
-from app.services.Documents.extraction_pipeline import call_groq_extraction
+from app.services.Documents.contract_fieds_extraction import extract_contract_fields
 
 router = APIRouter(prefix="/contracts", tags=["contracts"])
 
@@ -51,7 +51,7 @@ async def upload_contract(
 
         contract.raw_text = contract_text
 
-        extracted_data = call_groq_extraction(contract.raw_text)
+        extracted_data = extract_contract_fields(contract.raw_text)
 
         extracted_fields = ExtractedFields(
             contract_id=contract.id,

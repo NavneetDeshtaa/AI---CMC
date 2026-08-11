@@ -22,7 +22,7 @@ CONTRACT TEXT:
 """
 
 
-def call_groq_extraction(contract_text: str) -> dict:
+def extract_contract_fields(contract_text: str) -> dict:
     """
     Extracts structured fields (parties, dates, value, clauses, etc.) from
     contract text via the LLM. This function's job is document
