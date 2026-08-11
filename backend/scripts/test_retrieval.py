@@ -8,7 +8,7 @@ Usage (from your backend folder):
 """
 import sys
 from app.database import SessionLocal
-from app.services.retrieval import search_chunks, search_contracts
+from app.services.Search.retrieval import search_chunks, search_contracts
 
 
 def run(query: str):

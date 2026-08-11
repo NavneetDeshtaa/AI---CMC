@@ -7,7 +7,7 @@ Usage (from your backend folder, with venv active):
 from app.database import SessionLocal
 from app.models.contract import Contract
 from app.models.chunk import Chunk
-from app.services.chunk_processor import process_contract_chunks
+from app.services.Embeddings.chunk_processor import process_contract_chunks
 
 
 def run():
