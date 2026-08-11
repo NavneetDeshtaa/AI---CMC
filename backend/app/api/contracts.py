@@ -8,8 +8,8 @@ from app.models.user import User
 from app.schemas.contract import ContractOut
 from app.api.deps import get_current_user
 from app.core.storage import save_file
-from app.services.text_extraction import extract_contract_text
-from app.services.extraction_pipeline import call_groq_extraction
+from app.services.Documents.text_extraction import extract_contract_text
+from app.services.Documents.extraction_pipeline import call_groq_extraction
 
 router = APIRouter(prefix="/contracts", tags=["contracts"])
 

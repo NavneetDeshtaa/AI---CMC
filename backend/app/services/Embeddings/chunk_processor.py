@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 
 from app.models.contract import Contract
 from app.models.chunk import Chunk
-from app.services.chunking import chunk_text
-from app.services.embeddings import embed_texts
+from app.services.Embeddings.chunking import chunk_text
+from app.services.Embeddings.embeddings import embed_texts
 
 
 def process_contract_chunks(db: Session, contract_id: uuid.UUID) -> int:

@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.models.chunk import Chunk
 from app.models.contract import Contract
-from app.services.embeddings import embed_query
+from app.services.Embeddings.embeddings import embed_query
 
 
 def search_chunks(db: Session, query: str, top_k: int = 5, contract_ids: Optional[List[str]] = None,) -> List[dict]:

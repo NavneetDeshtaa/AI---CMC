@@ -5,7 +5,7 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.services.summary_orchestrator import get_or_create_summary
+from app.services.Summarization.summary_orchestrator import get_or_create_summary
 
 router = APIRouter(prefix="/contracts", tags=["summary"])
 

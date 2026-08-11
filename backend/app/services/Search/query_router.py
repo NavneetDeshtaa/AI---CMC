@@ -2,7 +2,7 @@ from datetime import date
 from typing import Optional
 from pydantic import BaseModel
 
-from app.services.groq_client import call_groq, parse_json_response
+from app.services.LLM.groq_client import call_groq, parse_json_response
 
 ROUTER_PROMPT = """You are a query router for a contract search system. Break the user's query into:
 1. A semantic part -- the conceptual/topical meaning to search for (e.g. "unlimited liability", "termination clauses") -- or null if the query is PURELY about dates/values/jurisdiction with no topic to search for.

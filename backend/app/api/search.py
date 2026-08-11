@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.services.nl_search import natural_language_search
+from app.services.Search.nl_search import natural_language_search
 
 router = APIRouter(prefix="/search", tags=["search"])
 

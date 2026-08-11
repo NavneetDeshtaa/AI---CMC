@@ -1,6 +1,6 @@
 from typing import List
 
-from app.services.groq_client import call_groq
+from app.services.LLM.groq_client import call_groq
 
 ANSWER_PROMPT = """You are a contract analysis assistant. Answer the user's question using ONLY the contract excerpts provided below.
 

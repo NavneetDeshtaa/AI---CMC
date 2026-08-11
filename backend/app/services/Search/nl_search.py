@@ -3,9 +3,9 @@ from sqlalchemy.orm import Session
 
 from app.models.contract import Contract
 from app.models.extracted_fields import ExtractedFields
-from app.services.query_router import route_query, QueryFilters
-from app.services.retrieval import search_contracts, search_chunks
-from app.services.rag_generation import generate_answer
+from app.services.Search.query_router import route_query, QueryFilters
+from app.services.Search.retrieval import search_contracts, search_chunks
+from app.services.Search.rag_generation import generate_answer
 
 
 def _filter_contract_ids(db: Session, filters: QueryFilters) -> Optional[List[str]]:

@@ -5,7 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.models.contract import Contract
 from app.models.contract_summary import ContractSummary
-from app.services.summarizer import generate_summary_content
+from app.services.Summarization.summarizer import generate_summary_content
 
 
 def _hash_text(text: str) -> str:

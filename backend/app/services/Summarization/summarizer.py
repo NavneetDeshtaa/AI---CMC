@@ -1,4 +1,4 @@
-from app.services.groq_client import call_groq, parse_json_response
+from app.services.LLM.groq_client import call_groq, parse_json_response
 
 SUMMARY_PROMPT = """You are a contract analysis assistant. Summarize the contract below for someone who needs the key points without reading the whole document.
 
