@@ -1,7 +1,8 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { FileText, ShieldCheck, Search, BrainCircuit } from "lucide-react";
+import Navbar from "../components/landing/Navbar";
+import { ArrowRight, ShieldCheck, LockKeyhole } from "lucide-react";
 
 import { login } from "../api/auth";
 import { tokenStorage } from "../lib/tokenStorage";
@@ -14,7 +15,7 @@ export default function LoginPage() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setError("");
@@ -22,7 +23,9 @@ export default function LoginPage() {
 
     try {
       const { token } = await login(email, password);
+
       tokenStorage.set(token);
+
       navigate("/contracts");
     } catch {
       setError("Invalid email or password.");
@@ -32,174 +35,243 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-slate-100">
-      <div className="grid min-h-screen lg:grid-cols-2">
-        {/* LEFT PANEL */}
+    <main className="relative min-h-screen overflow-hidden bg-paper text-ink">
+      {/* =====================================================
+          BACKGROUND
+      ===================================================== */}
 
-        <div className="hidden lg:flex flex-col justify-between bg-slate-900 text-white p-14">
-          <div>
-            <div className="flex items-center gap-3 mb-12">
-              <div className="h-12 w-12 rounded-xl bg-white text-slate-900 flex items-center justify-center">
-                <FileText size={26} />
-              </div>
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* Top-right glow */}
+        <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-insert/[0.06] blur-3xl" />
 
-              <div>
-                <h1 className="text-2xl font-bold">ContractIQ</h1>
+        {/* Bottom-left glow */}
+        <div className="absolute -left-40 bottom-[-180px] h-[450px] w-[450px] rounded-full bg-gold/[0.05] blur-3xl" />
 
-                <p className="text-slate-400 text-sm">
-                  AI Contract Intelligence Platform
-                </p>
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage:
+              "linear-gradient(#1C2321 1px, transparent 1px), linear-gradient(90deg, #1C2321 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }}
+        />
+      </div>
+
+      {/* Auth Navbar */}
+      <div className="relative z-10">
+        <Navbar />
+      </div>
+
+      {/* =====================================================
+          PAGE CONTENT
+      ===================================================== */}
+
+      <div className="relative z-10 flex min-h-screen flex-col px-5 py-6 sm:px-8 sm:py-8">
+        {/* =====================================================
+            LOGIN SECTION
+        ===================================================== */}
+
+        <section className="flex flex-1 items-center justify-center py-8 sm:py-10">
+          <div className="w-full max-w-[820px]">
+            {/* CARD */}
+
+            <div className="overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-[0_24px_70px_-30px_rgba(28,35,33,0.28)]">
+              {/* Top accent */}
+
+              <div className="h-1 bg-ink" />
+
+              <div className="grid lg:grid-cols-[0.85fr_1.15fr]">
+                {/* =================================================
+                    SMALL BRAND PANEL
+                ================================================= */}
+
+                <div className="hidden lg:flex flex-col justify-between border-r border-ink/10 bg-paper/45 p-10">
+                  <div>
+                    <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-xl bg-ink text-paper">
+                      <LockKeyhole size={19} strokeWidth={1.8} />
+                    </div>
+
+                    <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-gold">
+                      Contract intelligence
+                    </p>
+
+                    <h2 className="mt-4 font-display text-3xl font-semibold leading-tight text-ink">
+                      Your contracts,
+                      <br />
+                      understood.
+                    </h2>
+
+                    <p className="mt-4 max-w-[240px] text-sm leading-6 text-ink-soft">
+                      One secure workspace for managing, analyzing, and
+                      understanding your entire contract lifecycle.
+                    </p>
+                  </div>
+
+                  {/* Security note */}
+
+                  <div className="flex items-center gap-2 text-[10px] text-ink-soft">
+                    <ShieldCheck size={14} />
+
+                    <span>Secure enterprise workspace</span>
+                  </div>
+                </div>
+
+                {/* =================================================
+                    FORM
+                ================================================= */}
+
+                <div className="px-7 py-9 sm:px-12 sm:py-11">
+                  <div className="mx-auto max-w-[440px]">
+                    {/* Header */}
+
+                    <div className="mb-8">
+                      <p className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft lg:hidden">
+                        Secure workspace
+                      </p>
+
+                      <h1 className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+                        Welcome back.
+                      </h1>
+
+                      <p className="mt-2 text-sm leading-6 text-ink-soft">
+                        Sign in to continue managing your contracts.
+                      </p>
+                    </div>
+
+                    {/* FORM */}
+
+                    <form onSubmit={handleSubmit} className="space-y-5">
+                      {/* Email */}
+
+                      <div>
+                        <label
+                          htmlFor="email"
+                          className="mb-2 block text-xs font-semibold text-ink"
+                        >
+                          Work email
+                        </label>
+
+                        <input
+                          id="email"
+                          type="email"
+                          required
+                          autoComplete="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="you@company.com"
+                          className="h-12 w-full rounded-lg border border-ink/15 bg-white px-4 text-sm text-ink outline-none transition-all placeholder:text-ink-soft/50 hover:border-ink/25 focus:border-ink focus:ring-4 focus:ring-ink/[0.06]"
+                        />
+                      </div>
+
+                      {/* Password */}
+
+                      <div>
+                        <div className="mb-2 flex items-center justify-between">
+                          <label
+                            htmlFor="password"
+                            className="text-xs font-semibold text-ink"
+                          >
+                            Password
+                          </label>
+
+                          <button
+                            type="button"
+                            className="text-[11px] font-medium text-ink-soft transition-colors hover:text-ink"
+                          >
+                            Forgot password?
+                          </button>
+                        </div>
+
+                        <input
+                          id="password"
+                          type="password"
+                          required
+                          autoComplete="current-password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          placeholder="Enter your password"
+                          className="h-12 w-full rounded-lg border border-ink/15 bg-white px-4 text-sm text-ink outline-none transition-all placeholder:text-ink-soft/50 hover:border-ink/25 focus:border-ink focus:ring-4 focus:ring-ink/[0.06]"
+                        />
+                      </div>
+
+                      {/* Error */}
+
+                      {error && (
+                        <div
+                          role="alert"
+                          className="rounded-lg border border-redline/20 bg-redline/[0.06] px-4 py-3 text-xs font-medium text-redline"
+                        >
+                          {error}
+                        </div>
+                      )}
+
+                      {/* Submit */}
+
+                      <button
+                        type="submit"
+                        disabled={isLoading}
+                        className="group mt-2 flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-ink text-sm font-semibold text-paper transition-all duration-200 hover:-translate-y-0.5 hover:bg-ink/90 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+                      >
+                        {isLoading ? (
+                          <>
+                            <span className="h-4 w-4 animate-spin rounded-full border-2 border-paper/30 border-t-paper" />
+                            Signing in...
+                          </>
+                        ) : (
+                          <>
+                            Sign in to Clause
+                            <ArrowRight
+                              size={16}
+                              className="transition-transform duration-200 group-hover:translate-x-1"
+                            />
+                          </>
+                        )}
+                      </button>
+                    </form>
+
+                    {/* SIGN UP */}
+
+                    <div className="mt-6 text-center">
+                      <p className="text-xs text-ink-soft">
+                        Don't have an account?{" "}
+                        <Link
+                          to="/signup"
+                          className="font-semibold text-ink transition-colors hover:text-insert"
+                        >
+                          Create your workspace
+                        </Link>
+                      </p>
+                    </div>
+
+                    {/* SECURITY STRIP */}
+
+                    <div className="mt-7 flex items-center justify-center gap-3 border-t border-ink/10 pt-5">
+                      <div className="flex items-center gap-1.5 text-[10px] text-ink-soft">
+                        <ShieldCheck size={13} />
+                        Secure authentication
+                      </div>
+
+                      <span className="h-3 w-px bg-ink/10" />
+
+                      <div className="flex items-center gap-1.5 text-[10px] text-ink-soft">
+                        <LockKeyhole size={12} />
+                        Private workspace
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <h2 className="text-5xl font-bold leading-tight max-w-lg">
-              Review contracts with enterprise AI.
-            </h2>
+            {/* Bottom note */}
 
-            <p className="mt-6 text-slate-300 text-lg leading-8 max-w-xl">
-              Upload contracts, extract key information, identify risks, perform
-              semantic search and accelerate legal review with AI.
+            <p className="mt-5 text-center text-[10px] text-ink-soft/60">
+              © 2026 Clause · AI-native contract intelligence
             </p>
           </div>
-
-          <div className="space-y-5">
-            <Feature
-              icon={<BrainCircuit size={22} />}
-              title="AI Extraction"
-              text="Automatically extract parties, dates, values and obligations."
-            />
-
-            <Feature
-              icon={<ShieldCheck size={22} />}
-              title="Risk Detection"
-              text="Identify risky clauses and compliance issues instantly."
-            />
-
-            <Feature
-              icon={<Search size={22} />}
-              title="Semantic Search"
-              text="Search contracts using natural language."
-            />
-          </div>
-        </div>
-
-        {/* RIGHT PANEL */}
-
-        <div className="flex items-center justify-center p-8">
-          <div className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-10 shadow-xl">
-            <div className="mb-8">
-              <div className="lg:hidden flex items-center gap-3 mb-8">
-                <div className="h-10 w-10 rounded-lg bg-slate-900 text-white flex items-center justify-center">
-                  <FileText size={20} />
-                </div>
-
-                <div>
-                  <h2 className="font-bold text-lg">ContractIQ</h2>
-
-                  <p className="text-sm text-slate-500">
-                    AI Contract Intelligence
-                  </p>
-                </div>
-              </div>
-
-              <h1 className="text-3xl font-bold text-slate-900">
-                Welcome back
-              </h1>
-
-              <p className="mt-2 text-slate-500">
-                Sign in to continue to your workspace.
-              </p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Email
-                </label>
-
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="john@company.com"
-                  className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-2">
-                  Password
-                </label>
-
-                <input
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none transition focus:border-slate-900 focus:ring-2 focus:ring-slate-200"
-                />
-              </div>
-
-              {error && (
-                <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-sm text-red-700">
-                  {error}
-                </div>
-              )}
-
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="flex h-12 w-full items-center justify-center rounded-xl bg-slate-900 font-medium text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                {isLoading ? (
-                  <div className="flex items-center gap-3">
-                    <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                    Signing in...
-                  </div>
-                ) : (
-                  "Sign In"
-                )}
-              </button>
-
-            <p className="text-xs text-slate-500 text-center mt-4">
-          Don't have an account?{" "}
-          <Link to="/signup" className="text-slate-800 font-medium hover:underline">
-            Sign up
-          </Link>
-        </p>
-
-            </form>
-
-            <div className="mt-8 border-t border-slate-200 pt-6 text-center">
-              <p className="text-sm text-slate-500">
-                Enterprise-grade AI for contract lifecycle management.
-              </p>
-            </div>
-          </div>
-        </div>
+        </section>
       </div>
-    </div>
-  );
-}
-
-type FeatureProps = {
-  icon: React.ReactNode;
-  title: string;
-  text: string;
-};
-
-function Feature({ icon, title, text }: FeatureProps) {
-  return (
-    <div className="flex items-start gap-4">
-      <div className="rounded-lg bg-white/10 p-3">{icon}</div>
-
-      <div>
-        <h3 className="font-semibold">{title}</h3>
-
-        <p className="mt-1 text-sm leading-6 text-slate-400">{text}</p>
-      </div>
-    </div>
+    </main>
   );
 }
