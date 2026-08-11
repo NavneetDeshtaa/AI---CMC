@@ -5,16 +5,21 @@ import {
   FolderOpen,
   Clock3,
   AlertTriangle,
+  Search,
+  Sparkles,
+  ArrowRight,
 } from "lucide-react";
 
 import { useContracts } from "../hooks/useContracts";
 import ContractTable from "../components/contracts/ContractTable";
 import UploadContractModal from "../components/contracts/UploadContractModal";
-import SearchBar from "../components/ui/SearchBar";
+import AIContractSearchModal from "../components/ui/AIContractSearchModal";
 
 export default function ContractListPage() {
   const { data: contracts, isLoading, error } = useContracts();
+
   const [uploadOpen, setUploadOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const contractCount = contracts?.length ?? 0;
 
@@ -55,6 +60,7 @@ export default function ContractListPage() {
               size={15}
               className="transition-transform duration-200 group-hover:-translate-y-0.5"
             />
+
             Upload contract
           </button>
         </div>
@@ -86,12 +92,61 @@ export default function ContractListPage() {
         </div>
 
         {/* =====================================================
-            SEARCH
+            AI SEARCH LAUNCHER
         ===================================================== */}
 
-        <section className="mb-6 rounded-xl border border-ink/10 bg-white p-4 shadow-[0_8px_30px_-24px_rgba(28,35,33,0.2)]">
-          <SearchBar />
-        </section>
+        <button
+          type="button"
+          onClick={() => setSearchOpen(true)}
+          className="group mb-8 block w-full text-left"
+        >
+          <div className="relative overflow-hidden rounded-xl border border-ink/10 bg-white p-5 shadow-[0_8px_30px_-24px_rgba(28,35,33,0.2)] transition-all duration-200 hover:-translate-y-0.5 hover:border-ink/20 hover:shadow-[0_14px_40px_-24px_rgba(28,35,33,0.28)]">
+            {/* Subtle background accent */}
+            <div className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full bg-insert/[0.05] blur-3xl" />
+
+            <div className="relative flex items-center gap-4">
+              {/* Search icon */}
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-paper text-ink transition-colors group-hover:bg-ink group-hover:text-paper">
+                <Search size={19} />
+              </div>
+
+              {/* Search content */}
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center gap-2">
+                  <h2 className="text-sm font-semibold text-ink">
+                    Search your contracts
+                  </h2>
+
+                  <span className="inline-flex items-center gap-1 rounded-full bg-insert/[0.08] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-insert">
+                    <Sparkles size={9} />
+                    AI
+                  </span>
+                </div>
+
+                <p className="mt-1 truncate text-xs text-ink-soft sm:text-sm">
+                  Ask questions in plain language — “Which contracts expire
+                  next month?”
+                </p>
+              </div>
+
+              {/* Desktop action */}
+              <div className="hidden shrink-0 items-center gap-2 text-xs font-semibold text-ink-soft transition-colors group-hover:text-ink sm:flex">
+                Open search
+
+                <ArrowRight
+                  size={15}
+                  className="transition-transform duration-200 group-hover:translate-x-1"
+                />
+              </div>
+
+              {/* Mobile action */}
+              <ArrowRight
+                size={16}
+                className="shrink-0 text-ink-soft sm:hidden"
+              />
+            </div>
+          </div>
+        </button>
 
         {/* =====================================================
             TABLE HEADER
@@ -99,11 +154,15 @@ export default function ContractListPage() {
 
         <div className="mb-3 flex items-center justify-between">
           <div>
-            <h2 className="text-sm font-semibold text-ink">All contracts</h2>
+            <h2 className="text-sm font-semibold text-ink">
+              All contracts
+            </h2>
 
             <p className="mt-0.5 text-xs text-ink-soft">
               {contractCount > 0
-                ? `${contractCount} contract${contractCount === 1 ? "" : "s"} in your workspace`
+                ? `${contractCount} contract${
+                    contractCount === 1 ? "" : "s"
+                  } in your workspace`
                 : "Your uploaded contracts will appear here"}
             </p>
           </div>
@@ -121,11 +180,14 @@ export default function ContractListPage() {
         ===================================================== */}
 
         <section className="overflow-hidden rounded-xl border border-ink/10 bg-white shadow-[0_12px_40px_-30px_rgba(28,35,33,0.25)]">
+          {/* Loading */}
           {isLoading && (
             <div className="flex min-h-[260px] flex-col items-center justify-center px-6 text-center">
               <div className="mb-4 h-7 w-7 animate-spin rounded-full border-2 border-ink/15 border-t-ink" />
 
-              <p className="text-sm font-medium text-ink">Loading contracts</p>
+              <p className="text-sm font-medium text-ink">
+                Loading contracts
+              </p>
 
               <p className="mt-1 text-xs text-ink-soft">
                 Preparing your contract repository...
@@ -133,6 +195,7 @@ export default function ContractListPage() {
             </div>
           )}
 
+          {/* Error */}
           {error && (
             <div className="flex min-h-[260px] flex-col items-center justify-center px-6 text-center">
               <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-redline/[0.08] text-redline">
@@ -149,32 +212,37 @@ export default function ContractListPage() {
             </div>
           )}
 
-          {contracts && contracts.length === 0 && !isLoading && !error && (
-            <div className="flex min-h-[320px] flex-col items-center justify-center px-6 text-center">
-              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-paper text-ink">
-                <FileText size={21} />
+          {/* Empty state */}
+          {contracts &&
+            contracts.length === 0 &&
+            !isLoading &&
+            !error && (
+              <div className="flex min-h-[320px] flex-col items-center justify-center px-6 text-center">
+                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-paper text-ink">
+                  <FileText size={21} />
+                </div>
+
+                <h3 className="text-sm font-semibold text-ink">
+                  No contracts yet
+                </h3>
+
+                <p className="mt-1 max-w-sm text-xs leading-5 text-ink-soft">
+                  Upload your first contract to start extracting data,
+                  identifying risks, and searching your agreements with AI.
+                </p>
+
+                <button
+                  type="button"
+                  onClick={() => setUploadOpen(true)}
+                  className="mt-5 inline-flex items-center gap-2 rounded-lg bg-ink px-4 py-2 text-xs font-semibold text-paper transition-colors hover:bg-ink/90"
+                >
+                  <Upload size={14} />
+                  Upload your first contract
+                </button>
               </div>
+            )}
 
-              <h3 className="text-sm font-semibold text-ink">
-                No contracts yet
-              </h3>
-
-              <p className="mt-1 max-w-sm text-xs leading-5 text-ink-soft">
-                Upload your first contract to start extracting data, identifying
-                risks, and searching your agreements with AI.
-              </p>
-
-              <button
-                type="button"
-                onClick={() => setUploadOpen(true)}
-                className="mt-5 inline-flex items-center gap-2 rounded-lg bg-ink px-4 py-2 text-xs font-semibold text-paper transition-colors hover:bg-ink/90"
-              >
-                <Upload size={14} />
-                Upload your first contract
-              </button>
-            </div>
-          )}
-
+          {/* Contracts */}
           {contracts && contracts.length > 0 && (
             <ContractTable contracts={contracts} />
           )}
@@ -203,6 +271,15 @@ export default function ContractListPage() {
         open={uploadOpen}
         onClose={() => setUploadOpen(false)}
       />
+
+      {/* =====================================================
+          AI SEARCH MODAL
+      ===================================================== */}
+
+      <AIContractSearchModal
+        open={searchOpen}
+        onClose={() => setSearchOpen(false)}
+      />
     </main>
   );
 }
@@ -218,7 +295,12 @@ type StatCardProps = {
   muted?: boolean;
 };
 
-function StatCard({ icon, label, value, muted = false }: StatCardProps) {
+function StatCard({
+  icon,
+  label,
+  value,
+  muted = false,
+}: StatCardProps) {
   return (
     <div className="rounded-xl border border-ink/10 bg-white px-4 py-4">
       <div className="flex items-center justify-between">
@@ -227,7 +309,9 @@ function StatCard({ icon, label, value, muted = false }: StatCardProps) {
             {icon}
           </div>
 
-          <span className="text-xs font-medium text-ink-soft">{label}</span>
+          <span className="text-xs font-medium text-ink-soft">
+            {label}
+          </span>
         </div>
 
         <span

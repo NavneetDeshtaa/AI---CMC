@@ -4,7 +4,6 @@ import LoginPage from "../pages/LoginPage";
 import SignupPage from "../pages/SignupPage";
 import ContractListPage from "../pages/ContractListPage";
 import ContractDetailPage from "../pages/ContractDetailPage";
-import SearchPage from "../pages/SearchPage";
 import ProtectedRoute from "./ProtectedRoute";
 
 export default function AppRouter() {
@@ -17,7 +16,6 @@ export default function AppRouter() {
         <Route element={<ProtectedRoute />}>
           <Route path="/contracts" element={<ContractListPage />} />
           <Route path="/contracts/:id" element={<ContractDetailPage />} />
-          <Route path="/search" element={<SearchPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
