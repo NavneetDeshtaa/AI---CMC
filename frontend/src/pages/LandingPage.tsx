@@ -92,19 +92,24 @@ export default function LandingPage() {
     <div className="min-h-screen bg-paper text-ink font-body overflow-hidden">
       <Navbar />
 
-      {/* =====================================================
-          HERO
-      ===================================================== */}
-
       <main>
+        {/* =====================================================
+            HERO
+        ===================================================== */}
+
         <section className="relative bg-paper">
-          <div className="max-w-7xl mx-auto px-6 pt-20 md:pt-28 pb-20 md:pb-24">
-            <div className="max-w-5xl mx-auto text-center">
-              <p className="text-sm md:text-base font-medium tracking-wide text-brand mb-7">
+          <div className="mx-auto max-w-7xl px-6 pt-7 pb-16 sm:pt-9 sm:pb-20 md:pt-10 md:pb-24">
+            
+            {/* Single centered hero container */}
+            <div className="mx-auto w-full max-w-6xl text-center">
+              
+              {/* Eyebrow */}
+              <p className="mb-5 text-sm font-medium tracking-wide text-brand md:text-base">
                 AI-Native Contract Intelligence
               </p>
 
-              <h1 className="font-body font-semibold tracking-[-0.055em] text-5xl sm:text-6xl md:text-7xl lg:text-[84px] leading-[0.98] text-ink">
+              {/* Main heading */}
+              <h1 className="mx-auto w-full font-body text-5xl font-semibold leading-[0.98] tracking-[-0.055em] text-ink sm:text-6xl md:text-7xl lg:text-[84px]">
                 Turn every contract into
                 <br />
                 <span className="font-editorial font-normal text-brand">
@@ -112,18 +117,24 @@ export default function LandingPage() {
                 </span>
               </h1>
 
-              <p className="max-w-2xl mx-auto mt-8 text-base md:text-lg text-ink-soft leading-relaxed">
-                Clause reads, understands, analyzes, and manages your
-                contracts — from first draft to final renewal. One intelligent
-                layer across the entire contract lifecycle.
-              </p>
+              {/* Description */}
+              <div className="mx-auto mt-7 w-full max-w-3xl">
+                <p className="text-center text-base leading-relaxed text-ink-soft md:text-lg">
+                  Clause reads, understands, analyzes, and manages your
+                  contracts — from first draft to final renewal. One intelligent
+                  layer across the entire contract lifecycle.
+                </p>
+              </div>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-9">
+              {/* CTA buttons */}
+              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <button
+                  type="button"
                   onClick={() => navigate("/login")}
-                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-brand hover:bg-brand-dark text-white px-7 py-3.5 rounded-full text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5 shadow-sm"
+                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-brand px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-dark hover:shadow-md sm:w-auto"
                 >
                   Get Started
+
                   <span className="text-lg leading-none transition-transform group-hover:translate-x-1">
                     →
                   </span>
@@ -131,18 +142,19 @@ export default function LandingPage() {
 
                 <a
                   href="#how-it-works"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-7 py-3.5 rounded-full border border-ink/20 hover:border-ink/40 text-sm font-medium transition-colors"
+                  className="inline-flex w-full items-center justify-center gap-3 rounded-full border border-ink/20 px-7 py-3.5 text-sm font-medium transition-colors hover:border-ink/40 sm:w-auto"
                 >
-                  <span className="w-5 h-5 rounded-full border border-ink/30 flex items-center justify-center text-[9px]">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full border border-ink/30 text-[9px]">
                     ▶
                   </span>
+
                   See how it works
                 </a>
               </div>
             </div>
 
             {/* Product visualization */}
-            <div className="mt-16 md:mt-20">
+            <div className="mt-12 sm:mt-14 md:mt-16">
               <RedlineHero />
             </div>
           </div>
@@ -153,14 +165,14 @@ export default function LandingPage() {
         ===================================================== */}
 
         <section className="border-y border-border bg-white">
-          <div className="max-w-7xl mx-auto px-6 py-14 md:py-16">
-            <div className="grid md:grid-cols-3 gap-10 md:gap-6 items-center">
+          <div className="mx-auto max-w-7xl px-6 py-14 md:py-16">
+            <div className="grid items-center gap-10 md:grid-cols-3 md:gap-6">
               <div className="md:col-span-2">
-                <p className="text-xs uppercase tracking-[0.18em] font-mono text-ink-muted mb-4">
+                <p className="mb-4 font-mono text-xs uppercase tracking-[0.18em] text-ink-muted">
                   Contract intelligence, without the manual work
                 </p>
 
-                <h2 className="max-w-3xl text-3xl md:text-4xl lg:text-[46px] leading-[1.05] font-semibold tracking-[-0.04em]">
+                <h2 className="max-w-3xl text-3xl font-semibold leading-[1.05] tracking-[-0.04em] md:text-4xl lg:text-[46px]">
                   Your contracts already contain the answers.
                   <span className="text-ink-muted">
                     {" "}
@@ -184,14 +196,14 @@ export default function LandingPage() {
         ===================================================== */}
 
         <section className="bg-paper py-24 md:py-32">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
               <div className="lg:col-span-5">
-                <p className="text-xs uppercase tracking-[0.18em] font-mono text-brand mb-5">
+                <p className="mb-5 font-mono text-xs uppercase tracking-[0.18em] text-brand">
                   AI Contract Understanding
                 </p>
 
-                <h2 className="text-4xl md:text-5xl leading-[1.02] font-semibold tracking-[-0.045em]">
+                <h2 className="text-4xl font-semibold leading-[1.02] tracking-[-0.045em] md:text-5xl">
                   Don't just store contracts.
                   <br />
                   <span className="font-editorial font-normal text-brand">
@@ -199,13 +211,13 @@ export default function LandingPage() {
                   </span>
                 </h2>
 
-                <p className="mt-6 text-base text-ink-soft leading-relaxed max-w-lg">
+                <p className="mt-6 max-w-lg text-base leading-relaxed text-ink-soft">
                   Clause turns unstructured agreements into structured,
                   searchable intelligence. Every important field, clause,
                   obligation, and risk becomes accessible to your team.
                 </p>
 
-                <div className="flex flex-wrap gap-2 mt-7">
+                <div className="mt-7 flex flex-wrap gap-2">
                   {[
                     "Parties",
                     "Contract Value",
@@ -216,7 +228,7 @@ export default function LandingPage() {
                   ].map((item) => (
                     <span
                       key={item}
-                      className="px-3 py-1.5 rounded-full bg-white border border-border text-xs font-medium text-ink-soft"
+                      className="rounded-full border border-border bg-white px-3 py-1.5 text-xs font-medium text-ink-soft"
                     >
                       {item}
                     </span>
@@ -226,101 +238,105 @@ export default function LandingPage() {
 
               {/* Fake product UI */}
               <div className="lg:col-span-7">
-                <div className="bg-white rounded-2xl border border-border shadow-card overflow-hidden">
+                <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-card">
                   {/* Window header */}
-                  <div className="h-12 border-b border-border px-5 flex items-center justify-between">
+                  <div className="flex h-12 items-center justify-between border-b border-border px-5">
                     <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-danger" />
-                      <span className="w-2 h-2 rounded-full bg-warning" />
-                      <span className="w-2 h-2 rounded-full bg-success" />
+                      <span className="h-2 w-2 rounded-full bg-danger" />
+                      <span className="h-2 w-2 rounded-full bg-warning" />
+                      <span className="h-2 w-2 rounded-full bg-success" />
                     </div>
 
-                    <div className="text-[11px] font-mono text-ink-muted">
+                    <div className="font-mono text-[11px] text-ink-muted">
                       CLAUSE / CONTRACT
                     </div>
                   </div>
 
                   <div className="p-6 md:p-8">
-                    <div className="flex items-start justify-between gap-4 mb-8">
+                    <div className="mb-8 flex items-start justify-between gap-4">
                       <div>
-                        <p className="text-xs text-ink-muted mb-2">
+                        <p className="mb-2 text-xs text-ink-muted">
                           MASTER SERVICE AGREEMENT
                         </p>
-                        <h3 className="text-xl md:text-2xl font-semibold tracking-tight">
+
+                        <h3 className="text-xl font-semibold tracking-tight md:text-2xl">
                           Acme Corporation
                         </h3>
                       </div>
 
-                      <span className="shrink-0 px-2.5 py-1 rounded-full bg-success-soft text-success text-[11px] font-semibold">
+                      <span className="shrink-0 rounded-full bg-success-soft px-2.5 py-1 text-[11px] font-semibold text-success">
                         Active
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pb-7 border-b border-border">
+                    <div className="grid grid-cols-2 gap-4 border-b border-border pb-7 md:grid-cols-4">
                       <div>
-                        <p className="text-[11px] text-ink-muted mb-1">
+                        <p className="mb-1 text-[11px] text-ink-muted">
                           CONTRACT VALUE
                         </p>
                         <p className="font-semibold">$2.4M</p>
                       </div>
 
                       <div>
-                        <p className="text-[11px] text-ink-muted mb-1">
+                        <p className="mb-1 text-[11px] text-ink-muted">
                           EFFECTIVE
                         </p>
                         <p className="font-semibold">Jan 12, 2026</p>
                       </div>
 
                       <div>
-                        <p className="text-[11px] text-ink-muted mb-1">
+                        <p className="mb-1 text-[11px] text-ink-muted">
                           RENEWAL
                         </p>
                         <p className="font-semibold">Jan 12, 2027</p>
                       </div>
 
                       <div>
-                        <p className="text-[11px] text-ink-muted mb-1">
+                        <p className="mb-1 text-[11px] text-ink-muted">
                           GOVERNING LAW
                         </p>
                         <p className="font-semibold">California</p>
                       </div>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-7 mt-7">
+                    <div className="mt-7 grid gap-7 md:grid-cols-2">
                       <div>
-                        <div className="flex items-center justify-between mb-4">
+                        <div className="mb-4 flex items-center justify-between">
                           <p className="text-xs font-semibold uppercase tracking-wider">
                             AI Risk Analysis
                           </p>
 
-                          <span className="text-[10px] font-mono text-ai">
+                          <span className="font-mono text-[10px] text-ai">
                             AI ANALYZED
                           </span>
                         </div>
 
                         <div className="space-y-2.5">
-                          <div className="flex items-center justify-between p-3 rounded-lg bg-danger-soft">
+                          <div className="flex items-center justify-between rounded-lg bg-danger-soft p-3">
                             <span className="text-xs font-medium">
                               Unlimited liability
                             </span>
+
                             <span className="text-[10px] font-semibold text-danger">
                               HIGH RISK
                             </span>
                           </div>
 
-                          <div className="flex items-center justify-between p-3 rounded-lg bg-warning-soft">
+                          <div className="flex items-center justify-between rounded-lg bg-warning-soft p-3">
                             <span className="text-xs font-medium">
                               Auto-renewal
                             </span>
+
                             <span className="text-[10px] font-semibold text-warning">
                               REVIEW
                             </span>
                           </div>
 
-                          <div className="flex items-center justify-between p-3 rounded-lg bg-success-soft">
+                          <div className="flex items-center justify-between rounded-lg bg-success-soft p-3">
                             <span className="text-xs font-medium">
                               Governing law
                             </span>
+
                             <span className="text-[10px] font-semibold text-success">
                               FOUND
                             </span>
@@ -329,23 +345,26 @@ export default function LandingPage() {
                       </div>
 
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-wider mb-4">
+                        <p className="mb-4 text-xs font-semibold uppercase tracking-wider">
                           AI Summary
                         </p>
 
-                        <div className="p-4 rounded-lg bg-ai-soft border border-ai/10">
+                        <div className="rounded-lg border border-ai/10 bg-ai-soft p-4">
                           <div className="flex gap-2">
-                            <span className="mt-1 w-2 h-2 rounded-full bg-ai shrink-0" />
+                            <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-ai" />
 
                             <p className="text-xs leading-relaxed text-ink-soft">
                               This agreement contains a broad liability
-                              provision that may expose the company to
-                              uncapped damages. Consider reviewing the
-                              limitation language before approval.
+                              provision that may expose the company to uncapped
+                              damages. Consider reviewing the limitation
+                              language before approval.
                             </p>
                           </div>
 
-                          <button className="mt-4 text-[11px] font-semibold text-ai hover:text-ai-dark transition-colors">
+                          <button
+                            type="button"
+                            className="mt-4 text-[11px] font-semibold text-ai transition-colors hover:text-ai-dark"
+                          >
                             View source clause →
                           </button>
                         </div>
@@ -364,15 +383,15 @@ export default function LandingPage() {
 
         <section
           id="how-it-works"
-          className="bg-ink text-paper py-24 md:py-32"
+          className="bg-ink py-24 text-paper md:py-32"
         >
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="max-w-3xl mx-auto text-center mb-16">
-              <p className="text-xs uppercase tracking-[0.18em] font-mono text-brand mb-5">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="mx-auto mb-16 max-w-3xl text-center">
+              <p className="mb-5 font-mono text-xs uppercase tracking-[0.18em] text-brand">
                 One intelligent lifecycle
               </p>
 
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.045em] leading-[1]">
+              <h2 className="text-4xl font-semibold leading-[1] tracking-[-0.045em] md:text-5xl lg:text-6xl">
                 From first draft
                 <br />
                 <span className="font-editorial font-normal text-brand">
@@ -380,39 +399,39 @@ export default function LandingPage() {
                 </span>
               </h2>
 
-              <p className="mt-6 text-paper/60 leading-relaxed max-w-xl mx-auto">
+              <p className="mx-auto mt-6 max-w-xl leading-relaxed text-paper/60">
                 Clause connects every stage of the contract lifecycle so your
                 teams always know what happened, what changed, and what needs
                 attention next.
               </p>
             </div>
 
-            {/* Lifecycle ring-inspired layout */}
-            <div className="relative max-w-5xl mx-auto">
-              <div className="hidden md:block absolute inset-x-16 top-1/2 h-px bg-paper/10" />
+            {/* Lifecycle */}
+            <div className="relative mx-auto max-w-5xl">
+              <div className="absolute inset-x-16 top-1/2 hidden h-px bg-paper/10 md:block" />
 
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-8 relative">
+              <div className="relative grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-7">
                 {lifecycle.map((item, index) => (
                   <div
                     key={item.number}
-                    className="relative group text-center"
+                    className="group relative text-center"
                   >
-                    <div className="mx-auto mb-5 w-16 h-16 rounded-full bg-paper/[0.06] border border-paper/10 flex items-center justify-center group-hover:border-brand/60 group-hover:bg-brand/10 transition-all duration-300">
+                    <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-paper/10 bg-paper/[0.06] transition-all duration-300 group-hover:border-brand/60 group-hover:bg-brand/10">
                       <span className="font-mono text-[11px] text-brand">
                         {item.number}
                       </span>
                     </div>
 
-                    <p className="font-mono text-xs tracking-[0.16em] text-paper mb-2">
+                    <p className="mb-2 font-mono text-xs tracking-[0.16em] text-paper">
                       {item.label}
                     </p>
 
-                    <p className="text-xs text-paper/45 leading-relaxed">
+                    <p className="text-xs leading-relaxed text-paper/45">
                       {item.description}
                     </p>
 
                     {index < lifecycle.length - 1 && (
-                      <span className="hidden lg:block absolute top-8 -right-5 text-paper/20">
+                      <span className="absolute -right-5 top-8 hidden text-paper/20 lg:block">
                         →
                       </span>
                     )}
@@ -422,8 +441,9 @@ export default function LandingPage() {
             </div>
 
             <div className="mt-16 flex justify-center">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full border border-paper/10 bg-paper/[0.04]">
-                <span className="w-2 h-2 rounded-full bg-brand animate-pulse" />
+              <div className="inline-flex items-center gap-3 rounded-full border border-paper/10 bg-paper/[0.04] px-6 py-3">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-brand" />
+
                 <span className="text-xs text-paper/70">
                   Clause AI works across every stage
                 </span>
@@ -437,13 +457,13 @@ export default function LandingPage() {
         ===================================================== */}
 
         <section id="features" className="bg-white py-24 md:py-32">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="max-w-3xl mb-16">
-              <p className="text-xs uppercase tracking-[0.18em] font-mono text-brand mb-5">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="mb-16 max-w-3xl">
+              <p className="mb-5 font-mono text-xs uppercase tracking-[0.18em] text-brand">
                 Built for the entire contract lifecycle
               </p>
 
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-[-0.045em] leading-[1]">
+              <h2 className="text-4xl font-semibold leading-[1] tracking-[-0.045em] md:text-5xl lg:text-6xl">
                 One workspace.
                 <br />
                 <span className="font-editorial font-normal text-brand">
@@ -456,7 +476,7 @@ export default function LandingPage() {
               {featureGroups.map((group) => (
                 <div
                   key={group.number}
-                  className="grid lg:grid-cols-12 gap-8 lg:gap-16 py-12 md:py-16 group"
+                  className="group grid gap-8 py-12 lg:grid-cols-12 lg:gap-16 md:py-16"
                 >
                   <div className="lg:col-span-2">
                     <span className="font-mono text-xs text-ink-muted">
@@ -469,21 +489,21 @@ export default function LandingPage() {
                   </div>
 
                   <div className="lg:col-span-5">
-                    <h3 className="text-2xl md:text-3xl font-semibold tracking-[-0.035em] leading-tight group-hover:text-brand transition-colors duration-300">
+                    <h3 className="text-2xl font-semibold leading-tight tracking-[-0.035em] transition-colors duration-300 group-hover:text-brand md:text-3xl">
                       {group.title}
                     </h3>
                   </div>
 
                   <div className="lg:col-span-5">
-                    <p className="text-sm md:text-base text-ink-soft leading-relaxed">
+                    <p className="text-sm leading-relaxed text-ink-soft md:text-base">
                       {group.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 mt-6">
+                    <div className="mt-6 flex flex-wrap gap-2">
                       {group.items.map((item) => (
                         <span
                           key={item}
-                          className="px-3 py-1.5 rounded-full bg-paper border border-border text-xs font-medium"
+                          className="rounded-full border border-border bg-paper px-3 py-1.5 text-xs font-medium"
                         >
                           {item}
                         </span>
@@ -501,84 +521,87 @@ export default function LandingPage() {
         ===================================================== */}
 
         <section className="bg-paper py-24 md:py-32">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
               <div>
-                <p className="text-xs uppercase tracking-[0.18em] font-mono text-brand mb-5">
+                <p className="mb-5 font-mono text-xs uppercase tracking-[0.18em] text-brand">
                   Portfolio Intelligence
                 </p>
 
-                <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.045em] leading-[1.02]">
+                <h2 className="text-4xl font-semibold leading-[1.02] tracking-[-0.045em] md:text-5xl">
                   See your entire contract portfolio at a glance.
                 </h2>
 
-                <p className="mt-6 text-ink-soft leading-relaxed max-w-lg">
+                <p className="mt-6 max-w-lg leading-relaxed text-ink-soft">
                   Move beyond individual contracts. Understand contract
                   volume, financial exposure, upcoming expirations, approval
                   bottlenecks, and AI-detected risks across your organization.
                 </p>
 
                 <button
+                  type="button"
                   onClick={() => navigate("/login")}
-                  className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:text-brand-dark transition-colors"
+                  className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand transition-colors hover:text-brand-dark"
                 >
                   Explore Clause →
                 </button>
               </div>
 
               {/* Analytics visualization */}
-              <div className="bg-white border border-border rounded-2xl p-6 md:p-8 shadow-soft">
-                <div className="flex items-center justify-between mb-8">
+              <div className="rounded-2xl border border-border bg-white p-6 shadow-soft md:p-8">
+                <div className="mb-8 flex items-center justify-between">
                   <div>
-                    <p className="text-xs text-ink-muted uppercase tracking-wider">
+                    <p className="text-xs uppercase tracking-wider text-ink-muted">
                       Contract Portfolio
                     </p>
-                    <p className="text-2xl font-semibold mt-1">
-                      $48.6M
-                    </p>
+
+                    <p className="mt-1 text-2xl font-semibold">$48.6M</p>
                   </div>
 
-                  <span className="text-xs px-2.5 py-1 rounded-full bg-success-soft text-success font-semibold">
+                  <span className="rounded-full bg-success-soft px-2.5 py-1 text-xs font-semibold text-success">
                     +12.4%
                   </span>
                 </div>
 
-                <div className="flex items-end gap-3 h-40">
+                <div className="flex h-40 items-end gap-3">
                   {[38, 55, 46, 72, 64, 82, 68, 92, 76, 100, 84, 96].map(
                     (height, index) => (
                       <div
                         key={index}
-                        className="flex-1 h-full flex items-end"
+                        className="flex h-full flex-1 items-end"
                       >
                         <div
-                          className="w-full bg-brand/15 rounded-t-sm hover:bg-brand/40 transition-colors"
+                          className="w-full rounded-t-sm bg-brand/15 transition-colors hover:bg-brand/40"
                           style={{ height: `${height}%` }}
                         />
                       </div>
-                    )
+                    ),
                   )}
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 mt-7 pt-6 border-t border-border">
+                <div className="mt-7 grid grid-cols-3 gap-4 border-t border-border pt-6">
                   <div>
                     <p className="text-[10px] uppercase tracking-wider text-ink-muted">
                       Active
                     </p>
-                    <p className="text-lg font-semibold mt-1">1,284</p>
+
+                    <p className="mt-1 text-lg font-semibold">1,284</p>
                   </div>
 
                   <div>
                     <p className="text-[10px] uppercase tracking-wider text-ink-muted">
                       Renewing
                     </p>
-                    <p className="text-lg font-semibold mt-1">42</p>
+
+                    <p className="mt-1 text-lg font-semibold">42</p>
                   </div>
 
                   <div>
                     <p className="text-[10px] uppercase tracking-wider text-ink-muted">
                       At Risk
                     </p>
-                    <p className="text-lg font-semibold mt-1 text-danger">
+
+                    <p className="mt-1 text-lg font-semibold text-danger">
                       18
                     </p>
                   </div>
@@ -593,12 +616,12 @@ export default function LandingPage() {
         ===================================================== */}
 
         <section className="bg-ink text-paper">
-          <div className="max-w-5xl mx-auto px-6 py-24 md:py-32 text-center">
-            <p className="text-xs uppercase tracking-[0.18em] font-mono text-brand mb-6">
+          <div className="mx-auto max-w-5xl px-6 py-24 text-center md:py-32">
+            <p className="mb-6 font-mono text-xs uppercase tracking-[0.18em] text-brand">
               Contract intelligence starts here
             </p>
 
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-[-0.05em] leading-[0.98]">
+            <h2 className="text-4xl font-semibold leading-[0.98] tracking-[-0.05em] md:text-6xl lg:text-7xl">
               Stop managing contracts.
               <br />
               <span className="font-editorial font-normal text-brand">
@@ -606,16 +629,18 @@ export default function LandingPage() {
               </span>
             </h2>
 
-            <p className="max-w-xl mx-auto mt-7 text-paper/60 leading-relaxed">
+            <p className="mx-auto mt-7 max-w-xl leading-relaxed text-paper/60">
               Bring your contracts, workflows, and legal intelligence into one
               place.
             </p>
 
             <button
+              type="button"
               onClick={() => navigate("/login")}
-              className="group mt-9 inline-flex items-center gap-3 bg-brand hover:bg-brand-dark text-white px-8 py-4 rounded-full text-sm font-semibold transition-all hover:-translate-y-0.5"
+              className="group mt-9 inline-flex items-center gap-3 rounded-full bg-brand px-8 py-4 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-brand-dark"
             >
               Get Started
+
               <span className="text-lg transition-transform group-hover:translate-x-1">
                 →
               </span>
