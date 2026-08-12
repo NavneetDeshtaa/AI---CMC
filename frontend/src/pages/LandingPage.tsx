@@ -90,32 +90,6 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-paper text-ink font-body overflow-hidden">
-      {/* =====================================================
-          ANNOUNCEMENT BAR
-      ===================================================== */}
-
-      <div className="hidden md:block bg-ink text-paper">
-        <div className="max-w-7xl mx-auto px-6 h-10 flex items-center justify-center">
-          <p className="text-xs tracking-wide text-paper/80">
-            <span className="text-brand font-medium">
-              Introducing Clause AI
-            </span>
-            <span className="mx-3 text-paper/30">|</span>
-            Contract intelligence built into every stage of your workflow.
-            <button
-              onClick={() =>
-                document
-                  .getElementById("features")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="ml-3 text-paper hover:text-brand transition-colors"
-            >
-              Explore →
-            </button>
-          </p>
-        </div>
-      </div>
-
       <Navbar />
 
       {/* =====================================================
