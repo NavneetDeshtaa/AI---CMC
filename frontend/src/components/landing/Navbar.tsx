@@ -1,21 +1,41 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const scrollToSection = (id : string) => {
+  const scrollToSection = (id: string) => {
     setMobileOpen(false);
 
-    const element = document.getElementById(id);
+    // =====================================================
+    // Already on landing page
+    // =====================================================
 
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+    if (location.pathname === "/") {
+      const element = document.getElementById(id);
+
+      if (element) {
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+
+      return;
     }
+
+    // =====================================================
+    // Coming from another page
+    // =====================================================
+
+    navigate("/", {
+      state: {
+        scrollTo: id,
+      },
+    });
   };
 
   return (
@@ -32,7 +52,6 @@ export default function Navbar() {
             className="group flex items-center gap-3 shrink-0"
             aria-label="Clause home"
           >
-            {/* Clause mark */}
             <span className="relative w-8 h-8 flex items-center justify-center">
               <span className="absolute inset-0 rounded-[9px] bg-brand transition-transform duration-200 group-hover:rotate-3" />
 
@@ -112,6 +131,7 @@ export default function Navbar() {
                 →
               </span>
             </button>
+
           </div>
 
           {/* =====================================================
@@ -125,9 +145,12 @@ export default function Navbar() {
             aria-expanded={mobileOpen}
           >
             <div className="w-4 flex flex-col gap-1.5">
+
               <span
                 className={`block h-px bg-ink transition-transform duration-200 ${
-                  mobileOpen ? "translate-y-[4px] rotate-45" : ""
+                  mobileOpen
+                    ? "translate-y-[4px] rotate-45"
+                    : ""
                 }`}
               />
 
@@ -139,11 +162,15 @@ export default function Navbar() {
 
               <span
                 className={`block h-px bg-ink transition-transform duration-200 ${
-                  mobileOpen ? "-translate-y-[4px] -rotate-45" : ""
+                  mobileOpen
+                    ? "-translate-y-[4px] -rotate-45"
+                    : ""
                 }`}
               />
+
             </div>
           </button>
+
         </div>
 
         {/* =====================================================
@@ -166,7 +193,10 @@ export default function Navbar() {
                 className="flex items-center justify-between py-3.5 text-left text-sm font-medium text-ink"
               >
                 Product
-                <span className="text-ink-muted">→</span>
+
+                <span className="text-ink-muted">
+                  →
+                </span>
               </button>
 
               <button
@@ -174,7 +204,10 @@ export default function Navbar() {
                 className="flex items-center justify-between py-3.5 text-left text-sm font-medium text-ink"
               >
                 Solutions
-                <span className="text-ink-muted">→</span>
+
+                <span className="text-ink-muted">
+                  →
+                </span>
               </button>
 
               <button
@@ -182,7 +215,10 @@ export default function Navbar() {
                 className="flex items-center justify-between py-3.5 text-left text-sm font-medium text-ink"
               >
                 How it works
-                <span className="text-ink-muted">→</span>
+
+                <span className="text-ink-muted">
+                  →
+                </span>
               </button>
 
               <button
@@ -190,9 +226,17 @@ export default function Navbar() {
                 className="flex items-center justify-between py-3.5 text-left text-sm font-medium text-ink"
               >
                 Features
-                <span className="text-ink-muted">→</span>
+
+                <span className="text-ink-muted">
+                  →
+                </span>
               </button>
+
             </div>
+
+            {/* =================================================
+                MOBILE ACTIONS
+            ================================================= */}
 
             <div className="grid grid-cols-2 gap-3 mt-4 pt-5 border-t border-border">
 
@@ -217,8 +261,10 @@ export default function Navbar() {
               </button>
 
             </div>
+
           </div>
         </div>
+
       </div>
     </nav>
   );
