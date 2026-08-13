@@ -35,3 +35,6 @@ class Contract(Base):
     chunks = relationship("Chunk", back_populates="contract", cascade="all, delete-orphan",order_by="Chunk.chunk_index")
 
     summary = relationship("ContractSummary", back_populates="contract", uselist=False, cascade="all, delete-orphan")
+
+    # `chunks` and `summary` relationships:
+    risk_assessment = relationship("RiskAssessment", back_populates="contract", uselist=False, cascade="all, delete-orphan")
