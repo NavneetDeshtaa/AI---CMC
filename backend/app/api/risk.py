@@ -9,17 +9,14 @@ from app.services.Risk.orchestrator import get_or_create_risk_assessment
 
 router = APIRouter(prefix="/contracts", tags=["risk"])
 
-
 class FlaggedClause(BaseModel):
     clause: str
     issue: str
     severity: str
 
-
 class MissingClause(BaseModel):
     clause: str
     why_it_matters: str
-
 
 class RiskResponse(BaseModel):
     risk_score: int
