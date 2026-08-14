@@ -39,10 +39,10 @@ PHASE 2 :
   Embeddings
    - Dimensions 
 
-  Sentence Transformers. 
+  Sentence Transformers - Used this Python framework for the embeddings.
 
-  Singleton Loading (lru cache) 
+  Singleton Loading (lru cache) - to load the model once and store in memory. 
 
-  RAG 
+  RAG - R(search_chunks(), search_contracts()) , A(generate_answer()), G(call_groq()).
 
   Caching - Used in built python module - HASHLIB (uses SHA-256 Algorithm).
