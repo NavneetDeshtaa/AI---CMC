@@ -6,3 +6,4 @@ from app.models.contract_summary import ContractSummary
 from app.models.risk_assessment import RiskAssessment
 from app.models.policy_rule import PolicyRule
 from app.models.contract_template import ContractTemplate
+from app.models.renewal_obligation import RenewalObligation

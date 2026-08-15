@@ -41,3 +41,6 @@ class Contract(Base):
 
     # values: "uploaded" | "generated"
     source = Column(String(20), default="uploaded", nullable=False)
+
+    # IS a one-to-many, so it stays a list
+    renewal_obligations = relationship("RenewalObligation", back_populates="contract", cascade="all, delete-orphan")
