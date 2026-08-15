@@ -5,7 +5,7 @@ import SignupPage from "../pages/SignupPage";
 import ContractListPage from "../pages/ContractListPage";
 import ContractDetailPage from "../pages/ContractDetailPage";
 import ProtectedRoute from "./ProtectedRoute";
-import AnalyticsDashboardPage from '../pages/AnalyticsDashboardPage
+import AnalyticsDashboardPage from "../pages/AnalyticsDashboardPage";
 
 export default function AppRouter() {
   return (
