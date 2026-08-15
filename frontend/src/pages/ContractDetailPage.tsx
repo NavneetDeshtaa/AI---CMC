@@ -10,16 +10,13 @@ import {
 import { useContract } from "../hooks/useContract";
 import ExtractedFieldsPanel from "../components/contracts/ExtractedFieldsPanel";
 import SummaryPanel from "../components/ui/SummaryPanel";
+import RiskPanel from "../components/contracts/RiskPanel";
 
 export default function ContractDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const {
-    data: contract,
-    isLoading,
-    error,
-  } = useContract(id);
+  const { data: contract, isLoading, error } = useContract(id);
 
   /* =========================================================
      LOADING
@@ -33,9 +30,7 @@ export default function ContractDetailPage() {
             <div className="text-center">
               <div className="mx-auto mb-4 h-7 w-7 animate-spin rounded-full border-2 border-ink/15 border-t-ink" />
 
-              <p className="text-sm font-medium text-ink">
-                Loading contract
-              </p>
+              <p className="text-sm font-medium text-ink">Loading contract</p>
 
               <p className="mt-1 text-xs text-ink-soft">
                 Preparing contract intelligence...
@@ -57,7 +52,6 @@ export default function ContractDetailPage() {
         <div className="mx-auto max-w-6xl">
           <div className="flex min-h-[500px] items-center justify-center">
             <div className="text-center">
-
               <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-redline/[0.08] text-redline">
                 <FileText size={18} />
               </div>
@@ -67,8 +61,8 @@ export default function ContractDetailPage() {
               </h1>
 
               <p className="mt-1 text-xs text-ink-soft">
-                The contract may have been removed or you may not have access
-                to it.
+                The contract may have been removed or you may not have access to
+                it.
               </p>
 
               <button
@@ -79,7 +73,6 @@ export default function ContractDetailPage() {
                 <ArrowLeft size={13} />
                 Back to contracts
               </button>
-
             </div>
           </div>
         </div>
@@ -87,18 +80,18 @@ export default function ContractDetailPage() {
     );
   }
 
-  const uploadedDate = new Date(
-    contract.uploaded_at
-  ).toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  const uploadedDate = new Date(contract.uploaded_at).toLocaleDateString(
+    undefined,
+    {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    },
+  );
 
   return (
     <main className="min-h-full bg-paper px-5 py-8 sm:px-8 lg:px-10">
       <div className="mx-auto max-w-6xl">
-
         {/* =====================================================
             BACK
         ===================================================== */}
@@ -112,7 +105,6 @@ export default function ContractDetailPage() {
             size={14}
             className="transition-transform duration-200 group-hover:-translate-x-0.5"
           />
-
           Back to contracts
         </button>
 
@@ -121,19 +113,15 @@ export default function ContractDetailPage() {
         ===================================================== */}
 
         <header className="mb-8">
-
           <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-
             {/* Contract identity */}
 
             <div className="flex min-w-0 items-start gap-4">
-
               <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-ink text-paper">
                 <FileText size={19} />
               </div>
 
               <div className="min-w-0">
-
                 <div className="mb-2 flex items-center gap-2">
                   <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
                     Contract
@@ -151,7 +139,6 @@ export default function ContractDetailPage() {
                 </h1>
 
                 <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-ink-soft">
-
                   <span className="flex items-center gap-1.5">
                     <CalendarDays size={13} />
                     Uploaded {uploadedDate}
@@ -163,16 +150,13 @@ export default function ContractDetailPage() {
                     <ShieldCheck size={13} />
                     AI analyzed
                   </span>
-
                 </div>
-
               </div>
             </div>
 
             {/* Status */}
 
             <ContractStatus status={contract.status} />
-
           </div>
         </header>
 
@@ -181,9 +165,7 @@ export default function ContractDetailPage() {
         ===================================================== */}
 
         <section className="mb-6 rounded-xl border border-gold/20 bg-gold/[0.045] px-5 py-4">
-
           <div className="flex items-start gap-3">
-
             <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gold/10 text-gold">
               <Sparkles size={14} />
             </div>
@@ -194,21 +176,22 @@ export default function ContractDetailPage() {
               </p>
 
               <p className="mt-1 text-xs leading-5 text-ink-soft">
-                Clause has extracted key information from this agreement.
-                Review the structured fields and AI-generated summary below.
+                Clause has extracted key information from this agreement. Review
+                the structured fields and AI-generated summary below.
               </p>
             </div>
-
           </div>
-
         </section>
+
+        <div className="mt-6">
+          <RiskPanel contractId={contract.id} />
+        </div>
 
         {/* =====================================================
             CONTENT
         ===================================================== */}
 
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-
           {/* Extracted information */}
 
           <section>
@@ -232,9 +215,7 @@ export default function ContractDetailPage() {
 
           <section>
             <div className="mb-3">
-              <p className="text-sm font-semibold text-ink">
-                AI summary
-              </p>
+              <p className="text-sm font-semibold text-ink">AI summary</p>
 
               <p className="mt-0.5 text-xs text-ink-soft">
                 A concise overview of the agreement.
@@ -243,7 +224,6 @@ export default function ContractDetailPage() {
 
             <SummaryPanel contractId={contract.id} />
           </section>
-
         </div>
 
         {/* =====================================================
@@ -251,20 +231,17 @@ export default function ContractDetailPage() {
         ===================================================== */}
 
         <section className="mt-8 border-t border-ink/10 pt-8">
-
           <div className="mb-4">
             <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
               Contract intelligence
             </p>
 
             <p className="mt-1 text-xs text-ink-soft">
-              Additional analysis will appear here as the contract is
-              processed.
+              Additional analysis will appear here as the contract is processed.
             </p>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-
             <FutureFeature
               title="Risk analysis"
               description="Identify unusual or risky clauses."
@@ -284,11 +261,8 @@ export default function ContractDetailPage() {
               title="Version history"
               description="Compare contract revisions and redlines."
             />
-
           </div>
-
         </section>
-
       </div>
     </main>
   );
@@ -311,8 +285,7 @@ function ContractStatus({ status }: ContractStatusProps) {
     normalizedStatus === "active";
 
   const isFailed =
-    normalizedStatus === "failed" ||
-    normalizedStatus === "error";
+    normalizedStatus === "failed" || normalizedStatus === "error";
 
   return (
     <span
@@ -326,11 +299,7 @@ function ContractStatus({ status }: ContractStatusProps) {
     >
       <span
         className={`h-1.5 w-1.5 rounded-full ${
-          isFailed
-            ? "bg-redline"
-            : isReady
-              ? "bg-insert"
-              : "bg-gold"
+          isFailed ? "bg-redline" : isReady ? "bg-insert" : "bg-gold"
         }`}
       />
 
@@ -348,25 +317,16 @@ type FutureFeatureProps = {
   description: string;
 };
 
-function FutureFeature({
-  title,
-  description,
-}: FutureFeatureProps) {
+function FutureFeature({ title, description }: FutureFeatureProps) {
   return (
     <div className="rounded-xl border border-ink/10 bg-white px-4 py-4">
+      <p className="text-xs font-semibold text-ink">{title}</p>
 
-      <p className="text-xs font-semibold text-ink">
-        {title}
-      </p>
-
-      <p className="mt-1 text-[11px] leading-5 text-ink-soft">
-        {description}
-      </p>
+      <p className="mt-1 text-[11px] leading-5 text-ink-soft">{description}</p>
 
       <span className="mt-3 inline-block font-mono text-[9px] uppercase tracking-wider text-ink-soft/50">
         Coming soon
       </span>
-
     </div>
   );
 }

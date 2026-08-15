@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { ArrowUpRight, FileText } from "lucide-react";
 
 import type { Contract } from "../../types/contract";
+import { useRiskOverview } from "../../hooks/useRisk";
+import RiskBadge from "./RiskBadge";
 
 interface ContractTableProps {
   contracts: Contract[];
@@ -38,6 +40,15 @@ const statusStyles: Record<
 export default function ContractTable({ contracts }: ContractTableProps) {
   const navigate = useNavigate();
 
+  // Fetched once for the whole table -- NOT per row. This is why
+  // RiskBadge takes level/score as props instead of fetching itself:
+  // one bulk query here beats N individual queries for N rows.
+  const { data: riskOverview } = useRiskOverview();
+
+  const riskByContractId = new Map(
+    (riskOverview ?? []).map((r) => [r.contract_id, r]),
+  );
+
   if (contracts.length === 0) {
     return (
       <div className="flex min-h-[280px] flex-col items-center justify-center px-6 text-center">
@@ -59,7 +70,7 @@ export default function ContractTable({ contracts }: ContractTableProps) {
 
   return (
     <div className="w-full overflow-x-auto">
-      <table className="w-full min-w-[620px] border-collapse">
+      <table className="w-full min-w-[720px] border-collapse">
         <thead>
           <tr className="border-b border-ink/10 bg-paper/50 text-left">
             <th className="px-5 py-3.5">
@@ -80,6 +91,12 @@ export default function ContractTable({ contracts }: ContractTableProps) {
               </span>
             </th>
 
+            <th className="px-5 py-3.5">
+              <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-soft">
+                Risk
+              </span>
+            </th>
+
             <th className="w-12 px-5 py-3.5">
               <span className="sr-only">Open</span>
             </th>
@@ -91,6 +108,8 @@ export default function ContractTable({ contracts }: ContractTableProps) {
             const status =
               statusStyles[contract.status.toLowerCase()] ??
               statusStyles.uploaded;
+
+            const risk = riskByContractId.get(contract.id);
 
             const uploadedDate = new Date(
               contract.uploaded_at,
@@ -152,6 +171,15 @@ export default function ContractTable({ contracts }: ContractTableProps) {
 
                     {contract.status}
                   </span>
+                </td>
+
+                {/* Risk */}
+
+                <td className="px-5 py-4">
+                  <RiskBadge
+                    level={risk?.risk_level}
+                    score={risk?.risk_score}
+                  />
                 </td>
 
                 {/* Action */}
