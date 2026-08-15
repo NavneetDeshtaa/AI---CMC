@@ -5,6 +5,7 @@ import SignupPage from "../pages/SignupPage";
 import ContractListPage from "../pages/ContractListPage";
 import ContractDetailPage from "../pages/ContractDetailPage";
 import ProtectedRoute from "./ProtectedRoute";
+import AnalyticsDashboardPage from '../pages/AnalyticsDashboardPage
 
 export default function AppRouter() {
   return (
@@ -16,6 +17,7 @@ export default function AppRouter() {
         <Route element={<ProtectedRoute />}>
           <Route path="/contracts" element={<ContractListPage />} />
           <Route path="/contracts/:id" element={<ContractDetailPage />} />
+          <Route path="/analytics" element={<AnalyticsDashboardPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
