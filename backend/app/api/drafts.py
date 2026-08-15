@@ -12,6 +12,11 @@ from app.services.Draft_Generation.orchestrator import create_draft_contract
 
 router = APIRouter(prefix="/contracts", tags=["drafts"])
 
+# Separate top-level path -- /contracts/templates would collide with the
+# existing /contracts/{contract_id} route (same single-segment shape),
+# same issue we hit with /risk/overview earlier in this project.
+templates_router = APIRouter(prefix="/templates", tags=["drafts"])
+
 
 class TemplateResponse(BaseModel):
     id: uuid.UUID
@@ -45,7 +50,7 @@ class DraftGenerationResponse(BaseModel):
         from_attributes = True
 
 
-@router.get("/templates", response_model=List[TemplateResponse])
+@templates_router.get("", response_model=List[TemplateResponse])
 def list_templates(db: Session = Depends(get_db)):
     return db.query(ContractTemplate).filter(ContractTemplate.active == True).all()  # noqa: E712
 
