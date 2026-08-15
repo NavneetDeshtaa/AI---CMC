@@ -183,9 +183,6 @@ export default function ContractDetailPage() {
           </div>
         </section>
 
-        <div className="mt-6">
-          <RiskPanel contractId={contract.id} />
-        </div>
 
         {/* =====================================================
             CONTENT
@@ -224,6 +221,10 @@ export default function ContractDetailPage() {
 
             <SummaryPanel contractId={contract.id} />
           </section>
+
+                           <div className="mt-6">
+          <RiskPanel contractId={contract.id} />
+        </div>
         </div>
 
         {/* =====================================================
