@@ -17,7 +17,7 @@ class Contract(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     file_name = Column(String, nullable=False)
-    file_path = Column(String, nullable=False)
+    file_path = Column(String, nullable=True)
     uploaded_by = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False)
     status = Column(Enum(ContractStatus), default=ContractStatus.uploaded, nullable=False)
     uploaded_at = Column(DateTime(timezone=True), server_default=func.now())
@@ -38,3 +38,6 @@ class Contract(Base):
 
     # `chunks` and `summary` relationships:
     risk_assessment = relationship("RiskAssessment", back_populates="contract", uselist=False, cascade="all, delete-orphan")
+
+    # values: "uploaded" | "generated"
+    source = Column(String(20), default="uploaded", nullable=False)
