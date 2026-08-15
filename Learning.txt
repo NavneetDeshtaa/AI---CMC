@@ -46,3 +46,14 @@ PHASE 2 :
   RAG - R(search_chunks(), search_contracts()) , A(generate_answer()), G(call_groq()).
 
   Caching - Used in built python module - HASHLIB (uses SHA-256 Algorithm).
+
+
+PHASE 3 :
+
+   LangChain and LangGraph. 
+   Used LangGraph in my RISK services to build a scalable architecture.
+
+   MCP - Model Context Protocol.
+   Used MCP as a Separate architecture to expose my AI Contract Platform tools to MCP server. 
+   
+   Added the RISK analytics dashboarc also to visually see the Contract's management. 
