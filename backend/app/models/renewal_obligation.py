@@ -35,3 +35,4 @@ class RenewalObligation(Base):
     generated_at = Column(DateTime(timezone=True), server_default=func.now())
 
     contract = relationship("Contract", back_populates="renewal_obligations")
+    notified_at = Column(DateTime(timezone=True), nullable=True)   # when the user was last notified about this item
