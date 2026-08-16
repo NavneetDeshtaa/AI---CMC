@@ -57,3 +57,11 @@ PHASE 3 :
    Used MCP as a Separate architecture to expose my AI Contract Platform tools to MCP server. 
    
    Added the RISK analytics dashboarc also to visually see the Contract's management. 
+
+
+PHASE 4 : 
+
+    Celery - A background job system for python. 
+    Celery worker , Celery Beat. 
+    Redis (along side with celery).
+    Polling - Repeatedly asking the server for updates.
