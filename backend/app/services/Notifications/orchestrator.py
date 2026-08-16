@@ -8,17 +8,6 @@ from app.services.Notifications.email_sender import send_email
 
 
 def check_and_notify_upcoming(db: Session, days: int = 30) -> int:
-    """
-    Finds every RenewalObligation due within `days` that hasn't been
-    completed and hasn't already triggered a notification (notified_at
-    IS NULL) -- that last filter is what makes this safe to run daily
-    without spamming the same reminder over and over.
-
-    For each one: creates an in-app Notification row, sends an email to
-    the contract's uploader, then marks notified_at so it won't fire
-    again. Returns how many notifications were created (used for logging
-    and for the manual "check now" testing endpoint).
-    """
     cutoff = date.today() + timedelta(days=days)
     items = (
         db.query(RenewalObligation)
@@ -34,7 +23,7 @@ def check_and_notify_upcoming(db: Session, days: int = 30) -> int:
         contract = db.query(Contract).filter(Contract.id == item.contract_id).first()
         if contract is None:
             continue
-        user = contract.uploader  # existing relationship on Contract
+        user = contract.uploader
 
         title = f"{item.item_type.title()} due {item.due_date.isoformat()}"
         message = (
@@ -42,17 +31,21 @@ def check_and_notify_upcoming(db: Session, days: int = 30) -> int:
             f"{item.due_date.isoformat()}. {item.description or ''}"
         ).strip()
 
+        # CHANGED: capture the actual send result before saving, instead
+        # of firing the email as an unchecked side effect.
+        email_sent = False
+        if getattr(user, "email", None):
+            email_sent = send_email(user.email, title, message)
+
         notification = Notification(
             user_id=user.id,
             contract_id=contract.id,
             obligation_id=item.id,
             title=title,
             message=message,
+            email_sent=email_sent,
         )
         db.add(notification)
-
-        if getattr(user, "email", None):
-            send_email(user.email, title, message)
 
         item.notified_at = datetime.now(timezone.utc)
         count += 1

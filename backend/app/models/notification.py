@@ -24,3 +24,12 @@ class Notification(Base):
     is_read = Column(Boolean, default=False, nullable=False)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    # Add this ONE column to your existing Notification model:
+    email_sent = Column(Boolean, default=False, nullable=False)
+    # True only if smtplib's send actually completed without error.
+    # NOTE: this proves Gmail ACCEPTED the message for delivery -- it
+    # does NOT prove it reached the inbox (a later bounce, like the one
+    # you saw earlier, happens asynchronously and isn't visible here).
+    # This is the best signal available without building a full email
+    # deliverability tracking system.

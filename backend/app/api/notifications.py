@@ -20,6 +20,7 @@ class NotificationResponse(BaseModel):
     is_read: bool
     contract_id: Optional[uuid.UUID] = None
     created_at: str
+    email_sent: bool
 
     class Config:
         from_attributes = True
@@ -28,7 +29,7 @@ class NotificationResponse(BaseModel):
 def _to_response(n: Notification) -> NotificationResponse:
     return NotificationResponse(
         id=n.id, title=n.title, message=n.message, is_read=n.is_read,
-        contract_id=n.contract_id, created_at=n.created_at.isoformat(),
+        contract_id=n.contract_id, created_at=n.created_at.isoformat(),email_sent=n.email_sent,
     )
 
 
