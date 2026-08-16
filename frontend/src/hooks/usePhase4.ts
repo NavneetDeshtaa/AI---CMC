@@ -1,7 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getTemplates, generateDraft } from "../api/drafts";
 import { getNotifications, markNotificationRead } from "../api/notifications";
-import { getUpcomingObligations } from "../api/obligations";
 
 export function useTemplates() {
   return useQuery({ queryKey: ["templates"], queryFn: getTemplates });
@@ -29,12 +28,5 @@ export function useMarkNotificationRead() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notifications"] });
     },
-  });
-}
-
-export function useUpcomingObligations(days: number = 30) {
-  return useQuery({
-    queryKey: ["upcoming-obligations", days],
-    queryFn: () => getUpcomingObligations(days),
   });
 }

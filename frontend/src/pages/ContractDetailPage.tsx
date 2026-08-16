@@ -11,6 +11,7 @@ import { useContract } from "../hooks/useContract";
 import ExtractedFieldsPanel from "../components/contracts/ExtractedFieldsPanel";
 import SummaryPanel from "../components/ui/SummaryPanel";
 import RiskPanel from "../components/contracts/RiskPanel";
+import ObligationsPanel from "../components/contracts/ObligationsPanel";
 
 export default function ContractDetailPage() {
   const { id } = useParams<{ id: string }>();
@@ -183,7 +184,6 @@ export default function ContractDetailPage() {
           </div>
         </section>
 
-
         {/* =====================================================
             CONTENT
         ===================================================== */}
@@ -222,9 +222,13 @@ export default function ContractDetailPage() {
             <SummaryPanel contractId={contract.id} />
           </section>
 
-                           <div className="mt-6">
-          <RiskPanel contractId={contract.id} />
-        </div>
+          <div className="mt-6">
+            <ObligationsPanel contractId={contract.id} />
+          </div>
+
+          <div className="mt-6">
+            <RiskPanel contractId={contract.id} />
+          </div>
         </div>
 
         {/* =====================================================
@@ -243,16 +247,6 @@ export default function ContractDetailPage() {
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <FutureFeature
-              title="Risk analysis"
-              description="Identify unusual or risky clauses."
-            />
-
-            <FutureFeature
-              title="Key obligations"
-              description="Track commitments and responsibilities."
-            />
-
             <FutureFeature
               title="Renewal tracking"
               description="Monitor expiration and notice periods."

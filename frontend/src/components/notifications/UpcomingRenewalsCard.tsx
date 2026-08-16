@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { CalendarClock } from "lucide-react";
-import { useUpcomingObligations } from "../../hooks/usePhase4";
+import { useUpcomingObligations } from "../../hooks/useContractObligations";
 
 export default function UpcomingRenewalsCard() {
   const navigate = useNavigate();

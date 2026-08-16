@@ -6,9 +6,7 @@ from app.core.config import settings
 def send_email(to_address: str, subject: str, body: str) -> bool:
     """
     Sends a plain-text email via Gmail's SMTP server, using an app
-    password (NOT your real Gmail password -- generate one at
-    myaccount.google.com/apppasswords, requires 2FA enabled on the
-    account). Returns True/False rather than raising, since a failed
+    password. Returns True/False rather than raising, since a failed
     email send shouldn't crash the whole notification job -- the in-app
     notification still gets created either way.
     """
