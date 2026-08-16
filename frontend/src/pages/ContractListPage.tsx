@@ -14,6 +14,7 @@ import { useContracts } from "../hooks/useContracts";
 import ContractTable from "../components/contracts/ContractTable";
 import UploadContractModal from "../components/contracts/UploadContractModal";
 import AIContractSearchModal from "../components/ui/AIContractSearchModal";
+import Navbar from "../components/landing/Navbar";
 
 export default function ContractListPage() {
   const { data: contracts, isLoading, error } = useContracts();
@@ -26,6 +27,7 @@ export default function ContractListPage() {
   return (
     <main className="min-h-full bg-paper px-5 py-8 sm:px-8 lg:px-10">
       <div className="mx-auto max-w-7xl">
+        <Navbar/>
         {/* =====================================================
             HEADER
         ===================================================== */}
