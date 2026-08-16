@@ -16,6 +16,7 @@ import {
 import type { ReactNode } from "react";
 import { BarChart3 } from "lucide-react";
 import { useAnalytics } from "../hooks/useAnalytics";
+import UpcomingRenewalsCard from "../components/notifications/UpcomingRenewalsCard";
 
 interface RiskDistributionEntry {
   level: string;
@@ -113,6 +114,9 @@ export default function AnalyticsDashboardPage() {
       </p>
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+        <UpcomingRenewalsCard />
+
         {/* Upload Volume */}
         <ChartCard title="Upload Volume Over Time">
           <ResponsiveContainer width="100%" height={220}>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import NotificationBell from "../notifications/NotificationBell";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -106,6 +107,9 @@ export default function Navbar() {
             >
               Features
             </button>
+
+            <NotificationBell/>
+
           </div>
 
           {/* =====================================================
