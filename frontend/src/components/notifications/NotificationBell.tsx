@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Bell } from "lucide-react";
 import { useNotifications, useMarkNotificationRead } from "../../hooks/usePhase4";
+import { Mail, MailX } from "lucide-react";
 
 export default function NotificationBell() {
   const [open, setOpen] = useState(false);
@@ -52,6 +53,16 @@ export default function NotificationBell() {
                   }`}
                 >
                   <p className="text-xs font-semibold text-ink">{n.title}</p>
+                   <div className="mt-1 flex items-center gap-1">
+                    {n.email_sent ? (
+                      <Mail size={10} className="text-insert" />
+                    ) : (
+                      <MailX size={10} className="text-ink-soft/50" />
+                    )}
+                    <span className="text-[9px] text-ink-soft/60">
+                      {n.email_sent ? "Email sent" : "Email not sent"}
+                    </span>
+                  </div>
                   <p className="mt-0.5 line-clamp-2 text-xs text-ink-soft">{n.message}</p>
                   <p className="mt-1 font-mono text-[9px] text-ink-soft/60">
                     {new Date(n.created_at).toLocaleDateString()}

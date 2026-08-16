@@ -4,6 +4,7 @@ export interface Notification {
   message: string;
   is_read: boolean;
   contract_id: string | null;
+   email_sent: boolean;
   created_at: string;
 }
 
