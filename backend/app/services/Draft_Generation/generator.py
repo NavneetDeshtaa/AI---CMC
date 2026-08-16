@@ -18,7 +18,10 @@ DEAL DETAILS:
 - Governing law / jurisdiction: {jurisdiction}
 {additional_instructions_line}
 
-Write the full contract text, with clearly labeled numbered sections for each required clause, in professional but readable legal language. Fill in every clause with specific content tailored to the deal details above -- do NOT use placeholder brackets like [INSERT X]. Adapt the Limitation of Liability and Payment Terms clauses to be reasonable given the contract value. Adapt terminology and notice periods to fit the specified jurisdiction where relevant.
+Write the full contract text, with clearly labeled numbered sections for each required clause, in professional but readable legal language. 
+Fill in every clause with specific content tailored to the deal details above -- do NOT use placeholder brackets like [INSERT X]. 
+Adapt the Limitation of Liability and Payment Terms clauses to be reasonable given the contract value. 
+Adapt terminology and notice periods to fit the specified jurisdiction where relevant.
 
 Output only the contract text itself -- no preamble, no markdown # headers, use plain numbered sections (e.g. "1. Parties").
 """
