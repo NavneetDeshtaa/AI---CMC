@@ -5,26 +5,45 @@ interface RiskBadgeProps {
   score?: number;
 }
 
-const riskStyles: Record<RiskLevel, { container: string; dot: string }> = {
+const riskStyles: Record<
+  RiskLevel,
+  {
+    container: string;
+    dot: string;
+  }
+> = {
   low: {
-    container: "border-insert/20 bg-insert/[0.06] text-insert",
-    dot: "bg-insert",
+    container:
+      "border-[#cfe5dd] bg-[#f0f8f5] text-[#28755f]",
+    dot: "bg-[#2f9076]",
   },
+
   medium: {
-    container: "border-gold/20 bg-gold/[0.06] text-gold",
-    dot: "bg-gold",
+    container:
+      "border-[#eadfbd] bg-[#fbf7eb] text-[#8d7027]",
+    dot: "bg-[#b8953f]",
   },
+
   high: {
-    container: "border-redline/20 bg-redline/[0.06] text-redline",
-    dot: "bg-redline",
+    container:
+      "border-[#efcccc] bg-[#fff4f4] text-[#c94b4b]",
+    dot: "bg-[#d24d4d]",
   },
 };
 
-export default function RiskBadge({ level, score }: RiskBadgeProps) {
+export default function RiskBadge({
+  level,
+  score,
+}: RiskBadgeProps) {
+  /* =========================================================
+     NOT ANALYZED
+  ========================================================= */
+
   if (!level) {
     return (
-      <span className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-paper px-2.5 py-1 text-[10px] font-semibold text-ink-soft/60">
-        <span className="h-1.5 w-1.5 rounded-full bg-ink-soft/40" />
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-[#e0e0e0] bg-[#fafafa] px-2.5 py-1 text-[10px] font-medium text-[#8b8e95]">
+        <span className="h-1.5 w-1.5 rounded-full bg-[#b7b9bd]" />
+
         Not analyzed
       </span>
     );
@@ -34,10 +53,31 @@ export default function RiskBadge({ level, score }: RiskBadgeProps) {
 
   return (
     <span
-      className={`inline-flex items-center gap-2 rounded-full border px-2.5 py-1 text-[10px] font-semibold capitalize ${style.container}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-medium ${style.container}`}
     >
-      <span className={`h-1.5 w-1.5 rounded-full ${style.dot}`} />
-      {level} risk{score !== undefined ? ` \u00b7 ${score}` : ""}
+      {/* Risk indicator */}
+
+      <span
+        className={`h-1.5 w-1.5 shrink-0 rounded-full ${style.dot}`}
+      />
+
+      {/* Risk level */}
+
+      <span className="capitalize">
+        {level} risk
+      </span>
+
+      {/* Score */}
+
+      {score !== undefined && (
+        <>
+          <span className="opacity-40">·</span>
+
+          <span className="tabular-nums">
+            {score}
+          </span>
+        </>
+      )}
     </span>
   );
 }

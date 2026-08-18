@@ -1,13 +1,14 @@
 import { useParams, useNavigate } from "react-router-dom";
+
 import {
   ArrowLeft,
   CalendarDays,
   FileText,
   ShieldCheck,
-  Sparkles,
 } from "lucide-react";
 
 import { useContract } from "../hooks/useContract";
+
 import ExtractedFieldsPanel from "../components/contracts/ExtractedFieldsPanel";
 import SummaryPanel from "../components/ui/SummaryPanel";
 import RiskPanel from "../components/contracts/RiskPanel";
@@ -17,7 +18,11 @@ export default function ContractDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const { data: contract, isLoading, error } = useContract(id);
+  const {
+    data: contract,
+    isLoading,
+    error,
+  } = useContract(id);
 
   /* =========================================================
      LOADING
@@ -25,16 +30,18 @@ export default function ContractDetailPage() {
 
   if (isLoading) {
     return (
-      <main className="min-h-full bg-paper px-5 py-8 sm:px-8 lg:px-10">
-        <div className="mx-auto max-w-6xl">
+      <main className="min-h-full bg-white px-6 py-8 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-[1380px]">
           <div className="flex min-h-[500px] items-center justify-center">
             <div className="text-center">
-              <div className="mx-auto mb-4 h-7 w-7 animate-spin rounded-full border-2 border-ink/15 border-t-ink" />
+              <div className="mx-auto mb-4 h-6 w-6 animate-spin rounded-full border-2 border-[#dedede] border-t-[#181a20]" />
 
-              <p className="text-sm font-medium text-ink">Loading contract</p>
+              <p className="text-[13px] font-medium text-[#181a20]">
+                Loading contract
+              </p>
 
-              <p className="mt-1 text-xs text-ink-soft">
-                Preparing contract intelligence...
+              <p className="mt-1 text-[12px] text-[#85888f]">
+                Preparing contract details...
               </p>
             </div>
           </div>
@@ -49,29 +56,29 @@ export default function ContractDetailPage() {
 
   if (error || !contract) {
     return (
-      <main className="min-h-full bg-paper px-5 py-8 sm:px-8 lg:px-10">
-        <div className="mx-auto max-w-6xl">
+      <main className="min-h-full bg-white px-6 py-8 sm:px-8 lg:px-10">
+        <div className="mx-auto max-w-[1380px]">
           <div className="flex min-h-[500px] items-center justify-center">
             <div className="text-center">
-              <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-redline/[0.08] text-redline">
-                <FileText size={18} />
+              <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-full border border-[#e2e2e2] bg-[#fafafa] text-[#666a72]">
+                <FileText size={18} strokeWidth={1.6} />
               </div>
 
-              <h1 className="text-sm font-semibold text-ink">
+              <h1 className="text-[14px] font-semibold text-[#181a20]">
                 Contract not found
               </h1>
 
-              <p className="mt-1 text-xs text-ink-soft">
-                The contract may have been removed or you may not have access to
-                it.
+              <p className="mt-1 max-w-sm text-[12px] leading-5 text-[#85888f]">
+                The contract may have been removed or you may not have access
+                to it.
               </p>
 
               <button
                 type="button"
-                onClick={() => navigate("/contracts")}
-                className="mt-5 inline-flex items-center gap-2 rounded-lg bg-ink px-4 py-2 text-xs font-semibold text-paper transition-colors hover:bg-ink/90"
+                onClick={() => navigate("/app/contracts")}
+                className="mt-5 inline-flex h-9 items-center gap-2 rounded-lg bg-[#191c24] px-4 text-[12px] font-medium text-white transition-colors hover:bg-[#292d36]"
               >
-                <ArrowLeft size={13} />
+                <ArrowLeft size={14} />
                 Back to contracts
               </button>
             </div>
@@ -81,31 +88,36 @@ export default function ContractDetailPage() {
     );
   }
 
-  const uploadedDate = new Date(contract.uploaded_at).toLocaleDateString(
-    undefined,
-    {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    },
-  );
+  /* =========================================================
+     DATE
+  ========================================================= */
+
+  const uploadedDate = new Date(
+    contract.uploaded_at,
+  ).toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 
   return (
-    <main className="min-h-full bg-paper px-5 py-8 sm:px-8 lg:px-10">
-      <div className="mx-auto max-w-6xl">
+    <main className="min-h-full bg-white px-6 py-7 sm:px-8 lg:px-10">
+      <div className="mx-auto w-full max-w-[1380px]">
         {/* =====================================================
             BACK
         ===================================================== */}
 
         <button
           type="button"
-          onClick={() => navigate("/contracts")}
-          className="group mb-6 inline-flex items-center gap-2 text-xs font-medium text-ink-soft transition-colors hover:text-ink"
+          onClick={() => navigate("/app/contracts")}
+          className="group mb-5 inline-flex items-center gap-2 text-[12px] font-medium text-[#6f737b] transition-colors hover:text-[#181a20]"
         >
           <ArrowLeft
             size={14}
-            className="transition-transform duration-200 group-hover:-translate-x-0.5"
+            strokeWidth={1.7}
+            className="transition-transform duration-150 group-hover:-translate-x-0.5"
           />
+
           Back to contracts
         </button>
 
@@ -113,149 +125,142 @@ export default function ContractDetailPage() {
             CONTRACT HEADER
         ===================================================== */}
 
-        <header className="mb-8">
+        <header className="mb-8 border-b border-[#ececec] pb-7">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-            {/* Contract identity */}
+            {/* LEFT */}
 
             <div className="flex min-w-0 items-start gap-4">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-ink text-paper">
-                <FileText size={19} />
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[#e3e3e3] bg-white text-[#5f636b]">
+                <FileText size={17} strokeWidth={1.6} />
               </div>
 
               <div className="min-w-0">
-                <div className="mb-2 flex items-center gap-2">
-                  <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
+                {/* CONTRACT ID */}
+
+                <div className="mb-1.5 flex min-w-0 items-center gap-2">
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#9b9ea5]">
                     Contract
                   </span>
 
-                  <span className="h-1 w-1 rounded-full bg-ink/25" />
+                  <span className="h-1 w-1 shrink-0 rounded-full bg-[#c2c4c8]" />
 
-                  <span className="font-mono text-[10px] text-ink-soft/70">
+                  <span className="max-w-[320px] truncate text-[9px] text-[#aaadb2]">
                     {contract.id}
                   </span>
                 </div>
 
-                <h1 className="truncate font-display text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+                {/* TITLE */}
+
+                <h1 className="max-w-[900px] break-words text-[26px] font-semibold leading-[1.2] tracking-[-0.035em] text-[#181a20] sm:text-[30px]">
                   {contract.file_name}
                 </h1>
 
-                <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-ink-soft">
+                {/* META */}
+
+                <div className="mt-2.5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] text-[#777b83]">
                   <span className="flex items-center gap-1.5">
-                    <CalendarDays size={13} />
+                    <CalendarDays
+                      size={13}
+                      strokeWidth={1.6}
+                      className="text-[#9699a0]"
+                    />
+
                     Uploaded {uploadedDate}
                   </span>
 
-                  <span className="hidden h-3 w-px bg-ink/10 sm:block" />
+                  <span className="hidden h-3 w-px bg-[#dedede] sm:block" />
 
                   <span className="flex items-center gap-1.5">
-                    <ShieldCheck size={13} />
+                    <ShieldCheck
+                      size={13}
+                      strokeWidth={1.7}
+                      className="text-[#2f9076]"
+                    />
+
                     AI analyzed
                   </span>
                 </div>
               </div>
             </div>
 
-            {/* Status */}
+            {/* STATUS */}
 
             <ContractStatus status={contract.status} />
           </div>
         </header>
 
         {/* =====================================================
-            AI OVERVIEW STRIP
+            CONTRACT DETAILS
         ===================================================== */}
 
-        <section className="mb-6 rounded-xl border border-gold/20 bg-gold/[0.045] px-5 py-4">
-          <div className="flex items-start gap-3">
-            <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gold/10 text-gold">
-              <Sparkles size={14} />
-            </div>
+        <section className="mb-10">
+          {/* =================================================
+              TOP ROW
 
-            <div>
-              <p className="text-xs font-semibold text-ink">
-                Contract intelligence
-              </p>
+              Extracted Fields + Obligations
+          ================================================= */}
 
-              <p className="mt-1 text-xs leading-5 text-ink-soft">
-                Clause has extracted key information from this agreement. Review
-                the structured fields and AI-generated summary below.
-              </p>
-            </div>
+          <div className="grid items-start gap-6 xl:grid-cols-2">
+            {/* EXTRACTED INFORMATION */}
+
+            <section className="min-w-0">
+              <SectionHeader
+                title="Extracted Information"
+                description="Structured metadata identified from the agreement."
+              />
+
+              <ExtractedFieldsPanel
+                fields={contract.extracted_fields}
+                status={contract.status}
+              />
+            </section>
+
+            {/* OBLIGATIONS */}
+
+            <section className="min-w-0">
+              <SectionHeader
+                title="Renewals & Obligations"
+                description="Track important deadlines and contract duties."
+              />
+
+              <ObligationsPanel contractId={contract.id} />
+            </section>
           </div>
         </section>
 
         {/* =====================================================
-            CONTENT
+            AI ANALYSIS
         ===================================================== */}
 
-        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          {/* Extracted information */}
+        <section className="border-t border-[#ececec] pt-8">
+          {/* =================================================
+              BOTTOM ROW
 
-          <section>
-            <div className="mb-3">
-              <p className="text-sm font-semibold text-ink">
-                Extracted information
-              </p>
+              Summary + Risk
+          ================================================= */}
 
-              <p className="mt-0.5 text-xs text-ink-soft">
-                Key metadata identified from the contract.
-              </p>
-            </div>
+          <div className="grid items-start gap-6 xl:grid-cols-[1fr_1fr]">
+            {/* SUMMARY */}
 
-            <ExtractedFieldsPanel
-              fields={contract.extracted_fields}
-              status={contract.status}
-            />
-          </section>
+            <section className="min-w-0">
+              <SectionHeader
+                title="AI Summary"
+                description="A concise analysis of the agreement."
+              />
 
-          {/* Summary */}
+              <SummaryPanel contractId={contract.id} />
+            </section>
 
-          <section>
-            <div className="mb-3">
-              <p className="text-sm font-semibold text-ink">AI summary</p>
+            {/* RISK */}
 
-              <p className="mt-0.5 text-xs text-ink-soft">
-                A concise overview of the agreement.
-              </p>
-            </div>
+            <section className="min-w-0">
+              <SectionHeader
+                title="Risk Assessment"
+                description="Detected risks, missing clauses, and policy concerns."
+              />
 
-            <SummaryPanel contractId={contract.id} />
-          </section>
-
-          <div className="mt-6">
-            <ObligationsPanel contractId={contract.id} />
-          </div>
-
-          <div className="mt-6">
-            <RiskPanel contractId={contract.id} />
-          </div>
-        </div>
-
-        {/* =====================================================
-            FUTURE CONTRACT INTELLIGENCE
-        ===================================================== */}
-
-        <section className="mt-8 border-t border-ink/10 pt-8">
-          <div className="mb-4">
-            <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
-              Contract intelligence
-            </p>
-
-            <p className="mt-1 text-xs text-ink-soft">
-              Additional analysis will appear here as the contract is processed.
-            </p>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <FutureFeature
-              title="Renewal tracking"
-              description="Monitor expiration and notice periods."
-            />
-
-            <FutureFeature
-              title="Version history"
-              description="Compare contract revisions and redlines."
-            />
+              <RiskPanel contractId={contract.id} />
+            </section>
           </div>
         </section>
       </div>
@@ -264,64 +269,75 @@ export default function ContractDetailPage() {
 }
 
 /* ============================================================
-   STATUS
+   SECTION HEADER
+============================================================ */
+
+type SectionHeaderProps = {
+  title: string;
+  description: string;
+};
+
+function SectionHeader({
+  title,
+  description,
+}: SectionHeaderProps) {
+  return (
+    <div className="mb-3">
+      <h3 className="text-[13px] font-semibold tracking-[-0.01em] text-[#181a20]">
+        {title}
+      </h3>
+
+      <p className="mt-0.5 text-[11px] leading-4 text-[#85888f]">
+        {description}
+      </p>
+    </div>
+  );
+}
+
+/* ============================================================
+   CONTRACT STATUS
 ============================================================ */
 
 type ContractStatusProps = {
   status: string;
 };
 
-function ContractStatus({ status }: ContractStatusProps) {
+function ContractStatus({
+  status,
+}: ContractStatusProps) {
   const normalizedStatus = status.toLowerCase();
 
   const isReady =
     normalizedStatus === "completed" ||
     normalizedStatus === "processed" ||
-    normalizedStatus === "active";
+    normalizedStatus === "active" ||
+    normalizedStatus === "extracted";
 
   const isFailed =
-    normalizedStatus === "failed" || normalizedStatus === "error";
+    normalizedStatus === "failed" ||
+    normalizedStatus === "error";
 
   return (
     <span
-      className={`inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1.5 text-[11px] font-semibold ${
+      className={`inline-flex w-fit shrink-0 items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-medium capitalize ${
         isFailed
-          ? "border-redline/20 bg-redline/[0.06] text-redline"
+          ? "border-[#efcccc] bg-[#fff4f4] text-[#c94b4b]"
           : isReady
-            ? "border-insert/20 bg-insert/[0.06] text-insert"
-            : "border-gold/20 bg-gold/[0.06] text-gold"
+            ? "border-[#cfe5dd] bg-[#f0f8f5] text-[#28755f]"
+            : "border-[#eadfbd] bg-[#fbf7eb] text-[#8d7027]"
       }`}
     >
       <span
         className={`h-1.5 w-1.5 rounded-full ${
-          isFailed ? "bg-redline" : isReady ? "bg-insert" : "bg-gold"
+          isFailed
+            ? "bg-[#d24d4d]"
+            : isReady
+              ? "bg-[#2f9076]"
+              : "bg-[#b8953f]"
         }`}
       />
 
       {status}
     </span>
-  );
-}
-
-/* ============================================================
-   FUTURE FEATURE CARD
-============================================================ */
-
-type FutureFeatureProps = {
-  title: string;
-  description: string;
-};
-
-function FutureFeature({ title, description }: FutureFeatureProps) {
-  return (
-    <div className="rounded-xl border border-ink/10 bg-white px-4 py-4">
-      <p className="text-xs font-semibold text-ink">{title}</p>
-
-      <p className="mt-1 text-[11px] leading-5 text-ink-soft">{description}</p>
-
-      <span className="mt-3 inline-block font-mono text-[9px] uppercase tracking-wider text-ink-soft/50">
-        Coming soon
-      </span>
-    </div>
   );
 }

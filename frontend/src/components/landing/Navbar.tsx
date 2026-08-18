@@ -1,31 +1,11 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import NotificationBell from "../notifications/NotificationBell";
-import { tokenStorage } from "../../lib/tokenStorage";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  // =====================================================
-  // Authentication
-  // =====================================================
-
-  const isAuthenticated = !!tokenStorage.get();
-
-  // =====================================================
-  // Logout
-  // =====================================================
-
-  const handleLogout = () => {
-    tokenStorage.clear();
-
-    setMobileOpen(false);
-
-    navigate("/login");
-  };
 
   // =====================================================
   // Scroll navigation
@@ -63,23 +43,23 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-paper/90 backdrop-blur-xl border-b border-border">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="h-[72px] flex items-center justify-between">
-
+    <nav className="sticky top-0 z-50 border-b border-border bg-paper/90 backdrop-blur-xl">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="flex h-[72px] items-center justify-between">
           {/* =====================================================
               LOGO
           ===================================================== */}
 
           <button
+            type="button"
             onClick={() => navigate("/")}
-            className="group flex items-center gap-3 shrink-0"
+            className="group flex shrink-0 items-center gap-3"
             aria-label="Clause home"
           >
-            <span className="relative w-8 h-8 flex items-center justify-center">
+            <span className="relative flex h-8 w-8 items-center justify-center">
               <span className="absolute inset-0 rounded-[9px] bg-brand transition-transform duration-200 group-hover:rotate-3" />
 
-              <span className="relative text-white font-semibold text-sm tracking-tight">
+              <span className="relative text-sm font-semibold tracking-tight text-white">
                 C
               </span>
             </span>
@@ -93,12 +73,13 @@ export default function Navbar() {
               DESKTOP NAVIGATION
           ===================================================== */}
 
-          <div className="hidden lg:flex items-center gap-9 ml-12 mr-auto">
-
+          <div className="ml-12 mr-auto hidden items-center gap-9 lg:flex">
             {/* Product */}
+
             <button
+              type="button"
               onClick={() => scrollToSection("product")}
-              className="group flex items-center gap-1.5 text-sm font-medium text-ink-soft hover:text-ink transition-colors"
+              className="group flex items-center gap-1.5 text-sm font-medium text-ink-soft transition-colors hover:text-ink"
             >
               Product
 
@@ -108,9 +89,11 @@ export default function Navbar() {
             </button>
 
             {/* Solutions */}
+
             <button
+              type="button"
               onClick={() => scrollToSection("features")}
-              className="group flex items-center gap-1.5 text-sm font-medium text-ink-soft hover:text-ink transition-colors"
+              className="group flex items-center gap-1.5 text-sm font-medium text-ink-soft transition-colors hover:text-ink"
             >
               Solutions
 
@@ -120,64 +103,54 @@ export default function Navbar() {
             </button>
 
             {/* How it works */}
+
             <button
+              type="button"
               onClick={() => scrollToSection("how-it-works")}
-              className="text-sm font-medium text-ink-soft hover:text-ink transition-colors"
+              className="text-sm font-medium text-ink-soft transition-colors hover:text-ink"
             >
               How it works
             </button>
 
             {/* Features */}
+
             <button
+              type="button"
               onClick={() => scrollToSection("features")}
-              className="text-sm font-medium text-ink-soft hover:text-ink transition-colors"
+              className="text-sm font-medium text-ink-soft transition-colors hover:text-ink"
             >
               Features
             </button>
-
-            {/* Notification */}
-            {isAuthenticated && <NotificationBell />}
-
           </div>
 
           {/* =====================================================
               DESKTOP ACTIONS
           ===================================================== */}
 
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden items-center gap-3 md:flex">
+            {/* Login */}
 
-            {!isAuthenticated ? (
-              <>
-                {/* Login */}
-                <button
-                  onClick={() => navigate("/login")}
-                  className="px-4 py-2.5 text-sm font-medium text-ink hover:text-brand transition-colors"
-                >
-                  Log in
-                </button>
+            <button
+              type="button"
+              onClick={() => navigate("/login")}
+              className="px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:text-brand"
+            >
+              Log in
+            </button>
 
-                {/* Get Started */}
-                <button
-                  onClick={() => navigate("/login")}
-                  className="group inline-flex items-center gap-2 bg-brand hover:bg-brand-dark text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-200 hover:-translate-y-0.5"
-                >
-                  Get Started
+            {/* Get Started */}
 
-                  <span className="transition-transform duration-200 group-hover:translate-x-0.5">
-                    →
-                  </span>
-                </button>
-              </>
-            ) : (
-              /* Logout */
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2.5 text-sm font-medium text-ink-soft hover:text-redline transition-colors"
-              >
-                Log out
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={() => navigate("/signup")}
+              className="group inline-flex items-center gap-2 rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-dark"
+            >
+              Get Started
 
+              <span className="transition-transform duration-200 group-hover:translate-x-0.5">
+                →
+              </span>
+            </button>
           </div>
 
           {/* =====================================================
@@ -185,18 +158,16 @@ export default function Navbar() {
           ===================================================== */}
 
           <button
+            type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="md:hidden w-10 h-10 rounded-lg border border-border flex items-center justify-center hover:bg-white transition-colors"
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-border transition-colors hover:bg-white md:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
-            <div className="w-4 flex flex-col gap-1.5">
-
+            <div className="flex w-4 flex-col gap-1.5">
               <span
                 className={`block h-px bg-ink transition-transform duration-200 ${
-                  mobileOpen
-                    ? "translate-y-[4px] rotate-45"
-                    : ""
+                  mobileOpen ? "translate-y-[4px] rotate-45" : ""
                 }`}
               />
 
@@ -208,15 +179,11 @@ export default function Navbar() {
 
               <span
                 className={`block h-px bg-ink transition-transform duration-200 ${
-                  mobileOpen
-                    ? "-translate-y-[4px] -rotate-45"
-                    : ""
+                  mobileOpen ? "-translate-y-[4px] -rotate-45" : ""
                 }`}
               />
-
             </div>
           </button>
-
         </div>
 
         {/* =====================================================
@@ -224,118 +191,96 @@ export default function Navbar() {
         ===================================================== */}
 
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ${
+          className={`overflow-hidden transition-all duration-300 md:hidden ${
             mobileOpen
-              ? "max-h-[500px] opacity-100 pb-6"
+              ? "max-h-[500px] pb-6 opacity-100"
               : "max-h-0 opacity-0"
           }`}
         >
-          <div className="pt-3 border-t border-border">
-
+          <div className="border-t border-border pt-3">
             <div className="flex flex-col">
-
               {/* Product */}
+
               <button
+                type="button"
                 onClick={() => scrollToSection("product")}
                 className="flex items-center justify-between py-3.5 text-left text-sm font-medium text-ink"
               >
                 Product
 
-                <span className="text-ink-muted">
-                  →
-                </span>
+                <span className="text-ink-muted">→</span>
               </button>
 
               {/* Solutions */}
+
               <button
+                type="button"
                 onClick={() => scrollToSection("features")}
                 className="flex items-center justify-between py-3.5 text-left text-sm font-medium text-ink"
               >
                 Solutions
 
-                <span className="text-ink-muted">
-                  →
-                </span>
+                <span className="text-ink-muted">→</span>
               </button>
 
               {/* How it works */}
+
               <button
+                type="button"
                 onClick={() => scrollToSection("how-it-works")}
                 className="flex items-center justify-between py-3.5 text-left text-sm font-medium text-ink"
               >
                 How it works
 
-                <span className="text-ink-muted">
-                  →
-                </span>
+                <span className="text-ink-muted">→</span>
               </button>
 
               {/* Features */}
+
               <button
+                type="button"
                 onClick={() => scrollToSection("features")}
                 className="flex items-center justify-between py-3.5 text-left text-sm font-medium text-ink"
               >
                 Features
 
-                <span className="text-ink-muted">
-                  →
-                </span>
+                <span className="text-ink-muted">→</span>
               </button>
-
-              {/* Notification */}
-              {isAuthenticated && (
-                <div className="py-3.5">
-                  <NotificationBell />
-                </div>
-              )}
-
             </div>
 
             {/* =================================================
                 MOBILE ACTIONS
             ================================================= */}
 
-            <div className="grid grid-cols-2 gap-3 mt-4 pt-5 border-t border-border">
+            <div className="mt-4 grid grid-cols-2 gap-3 border-t border-border pt-5">
+              {/* Login */}
 
-              {!isAuthenticated ? (
-                <>
-                  {/* Login */}
-                  <button
-                    onClick={() => {
-                      setMobileOpen(false);
-                      navigate("/login");
-                    }}
-                    className="py-3 rounded-full border border-border text-sm font-semibold hover:border-ink/30 transition-colors"
-                  >
-                    Log in
-                  </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false);
+                  navigate("/login");
+                }}
+                className="rounded-full border border-border py-3 text-sm font-semibold transition-colors hover:border-ink/30"
+              >
+                Log in
+              </button>
 
-                  {/* Get Started */}
-                  <button
-                    onClick={() => {
-                      setMobileOpen(false);
-                      navigate("/login");
-                    }}
-                    className="py-3 rounded-full bg-brand text-white text-sm font-semibold hover:bg-brand-dark transition-colors"
-                  >
-                    Get Started
-                  </button>
-                </>
-              ) : (
-                /* Logout */
-                <button
-                  onClick={handleLogout}
-                  className="col-span-2 py-3 rounded-full border border-border text-sm font-semibold text-ink hover:border-redline/40 hover:text-redline transition-colors"
-                >
-                  Log out
-                </button>
-              )}
+              {/* Get Started */}
 
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false);
+                  navigate("/signup");
+                }}
+                className="rounded-full bg-brand py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-dark"
+              >
+                Get Started
+              </button>
             </div>
-
           </div>
         </div>
-
       </div>
     </nav>
   );

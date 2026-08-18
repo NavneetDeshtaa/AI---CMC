@@ -26,7 +26,7 @@ export default function LoginPage() {
 
       tokenStorage.set(token);
 
-      navigate("/contracts");
+      navigate("/app/contracts");
     } catch {
       setError("Invalid email or password.");
     } finally {

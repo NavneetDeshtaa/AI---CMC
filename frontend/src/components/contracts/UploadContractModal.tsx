@@ -30,7 +30,7 @@ export default function UploadContractModal({
   if (!open) return null;
 
   const handleFileChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const selectedFile = event.target.files?.[0];
 
@@ -59,7 +59,7 @@ export default function UploadContractModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-ink/35 px-4 backdrop-blur-[2px]"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 px-4 backdrop-blur-[2px]"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) {
           handleClose();
@@ -70,33 +70,23 @@ export default function UploadContractModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="upload-contract-title"
-        className="w-full max-w-lg overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-[0_30px_80px_-25px_rgba(28,35,33,0.3)]"
+        className="w-full max-w-[520px] overflow-hidden rounded-xl border border-[#dfdfdf] bg-white shadow-[0_24px_70px_-20px_rgba(0,0,0,0.28)]"
       >
         {/* =====================================================
             HEADER
         ===================================================== */}
 
-        <div className="flex items-start justify-between border-b border-ink/10 px-6 py-5">
+        <div className="flex items-start justify-between border-b border-[#ececec] px-6 py-5">
           <div>
-            <div className="mb-2 flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink text-paper">
-                <Upload size={14} />
-              </div>
-
-              <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.14em] text-ink-soft">
-                Contract repository
-              </span>
-            </div>
-
             <h2
               id="upload-contract-title"
-              className="font-display text-xl font-semibold tracking-tight text-ink"
+              className="text-[20px] font-semibold tracking-[-0.025em] text-[#181a20]"
             >
-              Upload a contract
+              Upload Contract
             </h2>
 
-            <p className="mt-1 text-xs leading-5 text-ink-soft">
-              Add an agreement to your workspace for AI analysis.
+            <p className="mt-1 text-[12px] leading-5 text-[#7d8087]">
+              Add an agreement to your workspace for contract analysis.
             </p>
           </div>
 
@@ -105,9 +95,9 @@ export default function UploadContractModal({
             onClick={handleClose}
             disabled={isPending}
             aria-label="Close upload dialog"
-            className="flex h-8 w-8 items-center justify-center rounded-lg text-ink-soft transition-colors hover:bg-paper hover:text-ink disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-[#7a7e86] transition-colors hover:bg-[#f5f5f4] hover:text-[#181a20] disabled:cursor-not-allowed disabled:opacity-40"
           >
-            <X size={17} />
+            <X size={17} strokeWidth={1.7} />
           </button>
         </div>
 
@@ -116,17 +106,18 @@ export default function UploadContractModal({
         ===================================================== */}
 
         <div className="px-6 py-6">
-
-          {/* Upload area */}
+          {/* =================================================
+              FILE UPLOAD AREA
+          ================================================= */}
 
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={isPending}
-            className={`group w-full rounded-xl border border-dashed p-8 text-center transition-all ${
+            className={`group w-full rounded-xl border border-dashed px-6 py-9 text-center transition-all ${
               file
-                ? "border-insert/30 bg-insert/[0.035]"
-                : "border-ink/15 bg-paper/40 hover:border-ink/30 hover:bg-paper/70"
+                ? "border-[#b9d9ce] bg-[#f4faf7]"
+                : "border-[#d8d8d8] bg-[#fafafa] hover:border-[#bfc1c5] hover:bg-[#f7f7f6]"
             }`}
           >
             <input
@@ -139,16 +130,19 @@ export default function UploadContractModal({
 
             {!file ? (
               <>
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-white text-ink-soft shadow-sm ring-1 ring-ink/10 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:text-ink">
-                  <Upload size={19} />
+                <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-full border border-[#e0e0e0] bg-white text-[#686c74] transition-colors group-hover:text-[#181a20]">
+                  <Upload
+                    size={18}
+                    strokeWidth={1.7}
+                  />
                 </div>
 
-                <p className="text-sm font-semibold text-ink">
+                <p className="text-[13px] font-semibold text-[#181a20]">
                   Choose a contract
                 </p>
 
-                <p className="mt-1 text-xs text-ink-soft">
-                  Click to browse your files
+                <p className="mt-1 text-[11px] text-[#85888f]">
+                  Click to browse files from your device
                 </p>
 
                 <div className="mt-4 flex items-center justify-center gap-2">
@@ -159,69 +153,78 @@ export default function UploadContractModal({
               </>
             ) : (
               <>
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-insert/[0.08] text-insert">
-                  <Check size={20} />
+                <div className="mx-auto mb-4 flex h-11 w-11 items-center justify-center rounded-full border border-[#cfe5dd] bg-[#edf7f3] text-[#2f9076]">
+                  <Check
+                    size={18}
+                    strokeWidth={2}
+                  />
                 </div>
 
-                <p className="mx-auto max-w-[300px] truncate text-sm font-semibold text-ink">
+                <p className="mx-auto max-w-[340px] truncate text-[13px] font-semibold text-[#181a20]">
                   {file.name}
                 </p>
 
-                <p className="mt-1 text-xs text-ink-soft">
-                  {formatFileSize(file.size)} · Ready for analysis
+                <p className="mt-1 text-[11px] text-[#777b83]">
+                  {formatFileSize(file.size)}
                 </p>
 
-                <span className="mt-4 inline-block text-[11px] font-semibold text-ink-soft transition-colors group-hover:text-ink">
-                  Choose a different file
-                </span>
+                <div className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-medium text-[#2f9076]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#2f9076]" />
+                  Ready to upload
+                </div>
+
+                <p className="mt-3 text-[10px] text-[#8f9298] transition-colors group-hover:text-[#555961]">
+                  Click to choose another file
+                </p>
               </>
             )}
           </button>
 
-          {/* Information */}
+          {/* =================================================
+              INFORMATION
+          ================================================= */}
 
-          <div className="mt-4 flex items-start gap-2.5 rounded-lg border border-ink/10 bg-paper/50 px-3.5 py-3">
+          <div className="mt-4 flex items-start gap-3 rounded-lg border border-[#e6e6e6] bg-[#fafafa] px-3.5 py-3">
             <FileText
               size={14}
-              className="mt-0.5 shrink-0 text-ink-soft"
+              strokeWidth={1.6}
+              className="mt-0.5 shrink-0 text-[#8b8e95]"
             />
 
-            <p className="text-[11px] leading-5 text-ink-soft">
-              After upload, Clause will extract key metadata, identify
-              important clauses, and prepare the contract for AI-powered
-              search and analysis.
+            <p className="text-[11px] leading-[1.65] text-[#70747c]">
+              Clause will extract metadata, identify key clauses, generate
+              contract insights, and prepare the document for AI search.
             </p>
           </div>
 
-          {/* Error */}
+          {/* =================================================
+              ERROR
+          ================================================= */}
 
           {error && (
-            <div className="mt-4 rounded-lg border border-redline/20 bg-redline/[0.06] px-4 py-3">
-              <p className="text-xs font-medium text-redline">
+            <div className="mt-4 rounded-lg border border-[#efd0d0] bg-[#fff6f6] px-4 py-3">
+              <p className="text-[11px] font-medium text-[#c94b4b]">
                 Upload failed. Please try again.
               </p>
             </div>
           )}
-
         </div>
 
         {/* =====================================================
             FOOTER
         ===================================================== */}
 
-        <div className="flex items-center justify-between border-t border-ink/10 bg-paper/30 px-6 py-4">
-
-          <p className="hidden text-[10px] text-ink-soft sm:block">
-            Supported formats: PDF, DOC, DOCX
+        <div className="flex items-center justify-between border-t border-[#ececec] bg-white px-6 py-4">
+          <p className="hidden text-[10px] text-[#9a9da3] sm:block">
+            PDF, DOC and DOCX supported
           </p>
 
           <div className="ml-auto flex items-center gap-2">
-
             <button
               type="button"
               onClick={handleClose}
               disabled={isPending}
-              className="rounded-lg px-4 py-2 text-xs font-semibold text-ink-soft transition-colors hover:bg-paper hover:text-ink disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex h-9 items-center justify-center rounded-lg px-4 text-[12px] font-medium text-[#62666e] transition-colors hover:bg-[#f5f5f4] hover:text-[#181a20] disabled:cursor-not-allowed disabled:opacity-40"
             >
               Cancel
             </button>
@@ -230,21 +233,25 @@ export default function UploadContractModal({
               type="button"
               onClick={handleSubmit}
               disabled={!file || isPending}
-              className="inline-flex min-w-[100px] items-center justify-center gap-2 rounded-lg bg-ink px-4 py-2 text-xs font-semibold text-paper transition-all hover:bg-ink/90 disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex h-9 min-w-[104px] items-center justify-center gap-2 rounded-lg bg-[#191c24] px-4 text-[12px] font-medium text-white transition-colors hover:bg-[#292d36] disabled:cursor-not-allowed disabled:bg-[#d5d6d8] disabled:text-[#92959b]"
             >
               {isPending ? (
                 <>
-                  <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-paper/30 border-t-paper" />
+                  <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+
                   Uploading
                 </>
               ) : (
                 <>
-                  <Upload size={13} />
+                  <Upload
+                    size={13}
+                    strokeWidth={1.8}
+                  />
+
                   Upload
                 </>
               )}
             </button>
-
           </div>
         </div>
       </div>
@@ -253,16 +260,18 @@ export default function UploadContractModal({
 }
 
 /* ============================================================
-   FILE TYPE BADGE
+   FILE TYPE
 ============================================================ */
 
 interface FileTypeProps {
   label: string;
 }
 
-function FileType({ label }: FileTypeProps) {
+function FileType({
+  label,
+}: FileTypeProps) {
   return (
-    <span className="rounded-md border border-ink/10 bg-white px-2 py-1 font-mono text-[9px] font-semibold text-ink-soft">
+    <span className="rounded-md border border-[#dddddd] bg-white px-2 py-1 text-[9px] font-semibold tracking-[0.04em] text-[#7c8087]">
       {label}
     </span>
   );
@@ -272,13 +281,28 @@ function FileType({ label }: FileTypeProps) {
    FILE SIZE
 ============================================================ */
 
-function formatFileSize(bytes: number): string {
-  if (bytes === 0) return "0 Bytes";
+function formatFileSize(
+  bytes: number,
+): string {
+  if (bytes === 0) {
+    return "0 Bytes";
+  }
 
-  const units = ["Bytes", "KB", "MB", "GB"];
-  const index = Math.floor(Math.log(bytes) / Math.log(1024));
+  const units = [
+    "Bytes",
+    "KB",
+    "MB",
+    "GB",
+  ];
+
+  const index = Math.floor(
+    Math.log(bytes) / Math.log(1024),
+  );
 
   return `${parseFloat(
-    (bytes / Math.pow(1024, index)).toFixed(1)
+    (
+      bytes /
+      Math.pow(1024, index)
+    ).toFixed(1),
   )} ${units[index]}`;
 }

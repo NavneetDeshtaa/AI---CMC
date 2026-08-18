@@ -27,7 +27,7 @@ export default function SignupPage() {
 
       tokenStorage.set(token);
 
-      navigate("/contracts");
+      navigate("/app/contracts");
     } catch (err: unknown) {
       const errorMessage =
         typeof err === "object" &&
