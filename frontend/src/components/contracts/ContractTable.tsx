@@ -8,7 +8,6 @@ import RiskBadge from "./RiskBadge";
 interface ContractTableProps {
   contracts: Contract[];
 }
-
 const statusStyles: Record<
   string,
   {
