@@ -9,7 +9,7 @@ Find TWO kinds of items:
 Only include items with a CONCRETE date you can determine or reasonably calculate from the contract text and the known dates below. Skip vague obligations with no derivable date (e.g. "reasonable efforts" with no deadline) -- a tracker needs real dates, not vague reminders.
 
 KNOWN CONTRACT DATES:
-- Effective date: {effective_date}
+- Effective date: {effective_date
 - Expiry date: {expiry_date}
 - Renewal terms (free text, from extraction): {renewal_terms}
 
