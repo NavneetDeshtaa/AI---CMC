@@ -141,7 +141,7 @@ export default function AppPage() {
                 onClick={() => navigate("/app/contracts")}
                 className="font-serif text-xl font-semibold tracking-tight text-[#17191f] lg:hidden"
               >
-                CLAUSE
+                PACTUM
               </button>
 
               {/* Desktop title */}
@@ -242,12 +242,12 @@ function SidebarContent({
           {/* Minimal symbol */}
 
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#17191f] text-xs font-semibold text-white">
-            C
+            P
           </div>
 
           <div className="text-left">
             <p className="font-serif text-[18px] font-semibold tracking-[-0.025em] text-[#17191f]">
-              CLAUSE
+              PACTUM
             </p>
 
             <p className="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.2em] text-[#9a9ca3]">

@@ -23,12 +23,12 @@ export default function Footer() {
             >
               <span className="w-8 h-8 rounded-[9px] bg-brand flex items-center justify-center transition-transform duration-200 group-hover:rotate-3">
                 <span className="text-white text-sm font-semibold">
-                  C
+                  P
                 </span>
               </span>
 
               <span className="text-[21px] font-semibold tracking-[-0.04em] text-ink">
-                Clause
+                PACTUM
               </span>
             </button>
 

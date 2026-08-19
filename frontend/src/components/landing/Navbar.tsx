@@ -60,12 +60,12 @@ export default function Navbar() {
               <span className="absolute inset-0 rounded-[9px] bg-brand transition-transform duration-200 group-hover:rotate-3" />
 
               <span className="relative text-sm font-semibold tracking-tight text-white">
-                C
+                P
               </span>
             </span>
 
             <span className="font-body text-[22px] font-semibold tracking-[-0.04em] text-ink">
-              Clause
+              PACTUM
             </span>
           </button>
 

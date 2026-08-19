@@ -10,7 +10,7 @@ const featureGroups = [
     eyebrow: "REPOSITORY",
     title: "Every contract, understood from the moment it lands.",
     description:
-      "Upload contracts in any format and let Clause automatically extract parties, dates, values, clauses, renewal terms, and other critical metadata into one searchable workspace.",
+      "Upload contracts in any format and let Pactum automatically extract parties, dates, values, clauses, renewal terms, and other critical metadata into one searchable workspace.",
     items: ["AI Contract Repository", "Automatic Data Extraction"],
   },
   {
@@ -18,7 +18,7 @@ const featureGroups = [
     eyebrow: "INTELLIGENCE",
     title: "Ask your contracts questions in plain English.",
     description:
-      'Forget keyword hunting. Ask questions like "Which agreements expire next month?" or "Show contracts with unlimited liability." Clause finds the answer and cites the source.',
+      'Forget keyword hunting. Ask questions like "Which agreements expire next month?" or "Show contracts with unlimited liability." PACTUM finds the answer and cites the source.',
     items: ["Natural Language Search", "AI Summarization"],
   },
   {
@@ -120,7 +120,7 @@ export default function LandingPage() {
               {/* Description */}
               <div className="mx-auto mt-7 w-full max-w-3xl">
                 <p className="text-center text-base leading-relaxed text-ink-soft md:text-lg">
-                  Clause reads, understands, analyzes, and manages your
+                  PACTUM reads, understands, analyzes, and manages your
                   contracts — from first draft to final renewal. One intelligent
                   layer across the entire contract lifecycle.
                 </p>
@@ -176,7 +176,7 @@ export default function LandingPage() {
                   Your contracts already contain the answers.
                   <span className="text-ink-muted">
                     {" "}
-                    Clause makes them accessible.
+                    PACTUM makes them accessible.
                   </span>
                 </h2>
               </div>
@@ -212,7 +212,7 @@ export default function LandingPage() {
                 </h2>
 
                 <p className="mt-6 max-w-lg text-base leading-relaxed text-ink-soft">
-                  Clause turns unstructured agreements into structured,
+                  PACTUM turns unstructured agreements into structured,
                   searchable intelligence. Every important field, clause,
                   obligation, and risk becomes accessible to your team.
                 </p>
@@ -400,7 +400,7 @@ export default function LandingPage() {
               </h2>
 
               <p className="mx-auto mt-6 max-w-xl leading-relaxed text-paper/60">
-                Clause connects every stage of the contract lifecycle so your
+                PACTUM connects every stage of the contract lifecycle so your
                 teams always know what happened, what changed, and what needs
                 attention next.
               </p>
@@ -445,7 +445,7 @@ export default function LandingPage() {
                 <span className="h-2 w-2 animate-pulse rounded-full bg-brand" />
 
                 <span className="text-xs text-paper/70">
-                  Clause AI works across every stage
+                  PACTUM AI works across every stage
                 </span>
               </div>
             </div>
@@ -543,7 +543,7 @@ export default function LandingPage() {
                   onClick={() => navigate("/login")}
                   className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand transition-colors hover:text-brand-dark"
                 >
-                  Explore Clause →
+                  Explore PACTUM →
                 </button>
               </div>
 
