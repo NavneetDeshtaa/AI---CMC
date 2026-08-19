@@ -8,3 +8,7 @@ from app.models.policy_rule import PolicyRule
 from app.models.contract_template import ContractTemplate
 from app.models.renewal_obligation import RenewalObligation
 from app.models.notification import Notification
+from app.models.approval_workflows import ApprovalWorkflow
+from app.models.approval_instances import ApprovalInstance
+from app.models.approval_actions import ApprovalAction
+from app.models.contract_versions import ContractVersion

@@ -44,3 +44,6 @@ class Contract(Base):
 
     # IS a one-to-many, so it stays a list
     renewal_obligations = relationship("RenewalObligation", back_populates="contract", cascade="all, delete-orphan")
+
+    approval_instance = relationship("ApprovalInstance", back_populates="contract", uselist=False, cascade="all, delete-orphan")
+    versions = relationship("ContractVersion", back_populates="contract", cascade="all, delete-orphan", order_by="ContractVersion.version_number")
